@@ -259,7 +259,8 @@ function deleteTeam(event) {
   }
 
   state.teams.splice(index, 1);
-  renameTeamInMatches(team.name, "À déterminer");
+  clearTeamFromMatches(team.name);
+  propagateWinners();
 
   persist();
   renderTeams();
@@ -274,6 +275,43 @@ function renameTeamInMatches(oldName, newName) {
     if (match.teamB === oldName) match.teamB = newName;
     if (match.winner === oldName) match.winner = newName;
   });
+}
+
+// Équipe supprimée : ses matchs redeviennent à jouer, sans vainqueur fantôme.
+function clearTeamFromMatches(name) {
+  const allMatches = [...state.warmup, ...state.rounds.flatMap((round) => round.matches)];
+  allMatches.forEach((match) => {
+    if (match.teamA !== name && match.teamB !== name) {
+      return;
+    }
+    if (match.teamA === name) match.teamA = "À déterminer";
+    if (match.teamB === name) match.teamB = "À déterminer";
+    match.scoreA = 0;
+    match.scoreB = 0;
+    match.winner = "";
+  });
+}
+
+// Reporte les vainqueurs de chaque tour dans le tour suivant : le vainqueur
+// du match i va dans le match ⌊i/2⌋, côté A si i est pair, côté B sinon.
+// Si l'occupant d'un créneau change, le résultat en aval est invalidé et la
+// correction se propage de tour en tour.
+function propagateWinners() {
+  for (let r = 0; r < state.rounds.length - 1; r++) {
+    state.rounds[r].matches.forEach((match, i) => {
+      const target = state.rounds[r + 1].matches[Math.floor(i / 2)];
+      const side = i % 2 === 0 ? "teamA" : "teamB";
+      const scoreKey = i % 2 === 0 ? "scoreA" : "scoreB";
+      const advancing = match.winner || "À déterminer";
+      if (target[side] !== advancing) {
+        if (target.winner === target[side]) {
+          target.winner = "";
+        }
+        target[side] = advancing;
+        target[scoreKey] = 0;
+      }
+    });
+  }
 }
 
 function rebuildSchedule() {
@@ -314,6 +352,10 @@ function updateMatch(event) {
   match.scoreA = scoreA;
   match.scoreB = scoreB;
   match.winner = winner;
+
+  if (section !== "warmup") {
+    propagateWinners();
+  }
 
   persist();
   renderChart();
