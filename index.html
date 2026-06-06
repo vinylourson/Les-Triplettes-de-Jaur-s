@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Les Triplettes de Jaurès</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Les Triplettes de Jaurès</h1>
+      <p>Tableau des résultats du tournoi de pétanque</p>
+      <nav>
+        <button class="nav-button active" data-view="chart">Tableau</button>
+        <button class="nav-button" data-view="teams">Équipes</button>
+        <button class="nav-button" data-view="admin">Back-office</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="chart-view" class="view">
+        <h2>Tour d'échauffement</h2>
+        <div id="warmup-list" class="match-grid"></div>
+
+        <h2>Tableau final (à partir des 1/8)</h2>
+        <div id="bracket-container"></div>
+      </section>
+
+      <section id="teams-view" class="view hidden">
+        <h2>Équipes et joueurs</h2>
+        <div id="teams-list" class="teams-grid"></div>
+      </section>
+
+      <section id="admin-view" class="view hidden">
+        <h2>Back-office</h2>
+        <div id="auth-container">
+          <p>Accès protégé requis pour modifier les résultats.</p>
+          <label for="password">Mot de passe</label>
+          <input id="password" type="password" autocomplete="current-password" />
+          <button id="login-button">Se connecter</button>
+          <p id="auth-feedback" class="feedback"></p>
+        </div>
+
+        <div id="admin-panel" class="hidden">
+          <div class="admin-toolbar">
+            <button id="logout-button">Se déconnecter</button>
+          </div>
+          <div>
+            <h3>Modifier le tour d'échauffement</h3>
+            <div id="admin-warmup"></div>
+          </div>
+          <div>
+            <h3>Modifier le tableau final</h3>
+            <div id="admin-bracket"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
