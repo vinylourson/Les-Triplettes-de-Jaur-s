@@ -29,18 +29,15 @@ function makeMatch(id, teamA, teamB) {
   return { id, teamA, teamB, scoreA: 0, scoreB: 0, winner: "" };
 }
 
-function initData() {
-  const fromStorage = localStorage.getItem(STORAGE_KEY);
-  if (fromStorage) {
-    return JSON.parse(fromStorage);
+function buildSchedule(teamNames) {
+  const warmup = [];
+  for (let i = 0; i < teamNames.length; i += 2) {
+    warmup.push(makeMatch(`warmup-${i / 2 + 1}`, teamNames[i], teamNames[i + 1] ?? "À déterminer"));
   }
 
-  const teams = defaultData.teams.map((team) => team.name);
-  const warmup = [];
   const roundOf16 = [];
-  for (let i = 0; i < teams.length; i += 2) {
-    warmup.push(makeMatch(`warmup-${i / 2 + 1}`, teams[i], teams[i + 1]));
-    roundOf16.push(makeMatch(`1-8-${i / 2 + 1}`, teams[i], teams[i + 1]));
+  for (let i = 0; i < 16; i += 2) {
+    roundOf16.push(makeMatch(`1-8-${i / 2 + 1}`, teamNames[i] ?? "À déterminer", teamNames[i + 1] ?? "À déterminer"));
   }
 
   const rounds = [
@@ -58,7 +55,17 @@ function initData() {
     { id: "final", label: "Finale", matches: [makeMatch("final-1", "À déterminer", "À déterminer")] }
   ];
 
-  return { teams: defaultData.teams, warmup, rounds };
+  return { warmup, rounds };
+}
+
+function initData() {
+  const fromStorage = localStorage.getItem(STORAGE_KEY);
+  if (fromStorage) {
+    return JSON.parse(fromStorage);
+  }
+
+  const schedule = buildSchedule(defaultData.teams.map((team) => team.name));
+  return { teams: defaultData.teams, warmup: schedule.warmup, rounds: schedule.rounds };
 }
 
 let state = initData();
@@ -76,9 +83,36 @@ function renderChart() {
   warmupContainer.innerHTML = state.warmup.map(renderMatchCard).join("");
 
   const bracketContainer = document.getElementById("bracket-container");
-  bracketContainer.innerHTML = `<div class="rounds-grid">${state.rounds
-    .map((round) => `<section class="round"><h3>${round.label}</h3>${round.matches.map(renderMatchCard).join("")}</section>`)
-    .join("")}</div>`;
+  bracketContainer.innerHTML = renderBracket();
+}
+
+function renderBracket() {
+  const [round16, quarter, semi, final] = state.rounds;
+  const half = (matches) => [matches.slice(0, matches.length / 2), matches.slice(matches.length / 2)];
+  const [r16Left, r16Right] = half(round16.matches);
+  const [qfLeft, qfRight] = half(quarter.matches);
+  const [sfLeft, sfRight] = half(semi.matches);
+
+  const slot = (match) => `<div class="match-slot">${renderMatchCard(match)}</div>`;
+  const pairs = (matches) => {
+    const blocks = [];
+    for (let i = 0; i < matches.length; i += 2) {
+      blocks.push(`<div class="bracket-pair">${slot(matches[i])}${slot(matches[i + 1])}</div>`);
+    }
+    return blocks.join("");
+  };
+  const column = (label, content, side) =>
+    `<section class="bracket-column ${side}"><h3>${label}</h3><div class="bracket-matches">${content}</div></section>`;
+
+  return `<div class="bracket">
+    ${column(round16.label, pairs(r16Left), "side-left")}
+    ${column(quarter.label, pairs(qfLeft), "side-left")}
+    ${column(semi.label, slot(sfLeft[0]), "side-left feeds-final")}
+    ${column(final.label, slot(final.matches[0]), "final-column")}
+    ${column(semi.label, slot(sfRight[0]), "side-right feeds-final")}
+    ${column(quarter.label, pairs(qfRight), "side-right")}
+    ${column(round16.label, pairs(r16Right), "side-right")}
+  </div>`;
 }
 
 function renderMatchCard(match) {
@@ -111,6 +145,17 @@ function renderAdmin() {
   authContainer.classList.add("hidden");
   adminPanel.classList.remove("hidden");
 
+  document.getElementById("admin-teams").innerHTML = `${state.teams
+    .map((team, index) => renderTeamForm(team, index))
+    .join("")}${renderTeamForm(null, "new")}`;
+
+  document.querySelectorAll(".team-form").forEach((form) => {
+    form.addEventListener("submit", saveTeam);
+  });
+  document.querySelectorAll(".team-delete").forEach((button) => {
+    button.addEventListener("click", deleteTeam);
+  });
+
   document.getElementById("admin-warmup").innerHTML = state.warmup.map((match) => renderMatchForm(match, "warmup")).join("");
 
   document.getElementById("admin-bracket").innerHTML = state.rounds
@@ -142,6 +187,89 @@ function renderMatchForm(match, section) {
       <select name="winner">${winnerOptions}</select>
       <button type="submit">Enregistrer</button>
     </form>`;
+}
+
+function renderTeamForm(team, index) {
+  const isNew = index === "new";
+  return `<form class="team-form form-card" data-index="${index}">
+      ${isNew ? "<h4>Ajouter une équipe</h4>" : ""}
+      <label>Nom de l'équipe</label>
+      <input type="text" name="name" value="${team ? team.name : ""}" required />
+      <label>Joueurs (séparés par des virgules)</label>
+      <input type="text" name="members" value="${team ? team.members.join(", ") : ""}" required />
+      <button type="submit">${isNew ? "Ajouter" : "Enregistrer"}</button>
+      ${isNew ? "" : `<button type="button" class="team-delete" data-index="${index}">Supprimer</button>`}
+    </form>`;
+}
+
+function saveTeam(event) {
+  event.preventDefault();
+  const form = event.currentTarget;
+  const name = form.elements.name.value.trim();
+  const members = form.elements.members.value
+    .split(",")
+    .map((member) => member.trim())
+    .filter(Boolean);
+
+  if (!name) {
+    return;
+  }
+
+  const index = form.dataset.index;
+  if (index === "new") {
+    state.teams.push({ name, members });
+  } else {
+    const team = state.teams[Number(index)];
+    if (team.name !== name) {
+      renameTeamInMatches(team.name, name);
+    }
+    team.name = name;
+    team.members = members;
+  }
+
+  persist();
+  renderTeams();
+  renderChart();
+  renderAdmin();
+}
+
+function deleteTeam(event) {
+  const index = Number(event.currentTarget.dataset.index);
+  const team = state.teams[index];
+  if (!confirm(`Supprimer l'équipe « ${team.name} » ?`)) {
+    return;
+  }
+
+  state.teams.splice(index, 1);
+  renameTeamInMatches(team.name, "À déterminer");
+
+  persist();
+  renderTeams();
+  renderChart();
+  renderAdmin();
+}
+
+function renameTeamInMatches(oldName, newName) {
+  const allMatches = [...state.warmup, ...state.rounds.flatMap((round) => round.matches)];
+  allMatches.forEach((match) => {
+    if (match.teamA === oldName) match.teamA = newName;
+    if (match.teamB === oldName) match.teamB = newName;
+    if (match.winner === oldName) match.winner = newName;
+  });
+}
+
+function rebuildSchedule() {
+  if (!confirm("Régénérer le tableau à partir des équipes actuelles ? Tous les scores seront remis à zéro.")) {
+    return;
+  }
+
+  const schedule = buildSchedule(state.teams.map((team) => team.name));
+  state.warmup = schedule.warmup;
+  state.rounds = schedule.rounds;
+
+  persist();
+  renderChart();
+  renderAdmin();
 }
 
 function updateMatch(event) {
@@ -215,6 +343,7 @@ function bootstrap() {
   renderTeams();
   setupNavigation();
   setupAuth();
+  document.getElementById("rebuild-schedule-button").addEventListener("click", rebuildSchedule);
   renderAdmin();
   persist();
 }

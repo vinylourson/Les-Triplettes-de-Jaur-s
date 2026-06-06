@@ -56,22 +56,116 @@ button {
   margin-bottom: 1.5rem;
 }
 
-.match-card,
-.round {
+.match-card {
   background: white;
   border-radius: 0.5rem;
   padding: 0.75rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
-.rounds-grid {
+.bracket {
+  --connector: #94a3b8;
+  --bracket-gap: 2rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(7, minmax(150px, 1fr));
+  column-gap: var(--bracket-gap);
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
 }
 
-.round h3 {
+.bracket-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.bracket-column h3 {
   margin-top: 0;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.bracket-matches {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.bracket-pair {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.match-slot {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* Stub from each match toward the centre of the bracket */
+.side-left .match-slot::after,
+.side-right .match-slot::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(var(--bracket-gap) / 2);
+  border-top: 2px solid var(--connector);
+}
+
+.side-left .match-slot::after {
+  left: 100%;
+}
+
+.side-right .match-slot::before {
+  right: 100%;
+}
+
+/* Semi-finals connect straight into the final across the full gap */
+.side-left.feeds-final .match-slot::after,
+.side-right.feeds-final .match-slot::before {
+  width: var(--bracket-gap);
+}
+
+/* Vertical line joining a pair of matches */
+.bracket-pair::before {
+  content: "";
+  position: absolute;
+  top: 25%;
+  bottom: 25%;
+}
+
+.side-left .bracket-pair::before {
+  left: calc(100% + var(--bracket-gap) / 2);
+  border-left: 2px solid var(--connector);
+}
+
+.side-right .bracket-pair::before {
+  right: calc(100% + var(--bracket-gap) / 2);
+  border-right: 2px solid var(--connector);
+}
+
+/* Stub from the pair junction into the next round's match */
+.bracket-pair::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: calc(var(--bracket-gap) / 2);
+  border-top: 2px solid var(--connector);
+}
+
+.side-left .bracket-pair::after {
+  left: calc(100% + var(--bracket-gap) / 2);
+}
+
+.side-right .bracket-pair::after {
+  right: calc(100% + var(--bracket-gap) / 2);
+}
+
+.final-column .match-card {
+  border: 2px solid #2563eb;
 }
 
 .winner {
