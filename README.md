@@ -1,4 +1,4 @@
-# Les-Triplettes-de-Jaur-s
+# Les Triplettes de Jaurès
 
 Site web statique (compatible GitHub Pages) pour afficher et gérer un tournoi de pétanque.
 
