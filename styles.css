@@ -274,20 +274,57 @@ summary:focus-visible {
   color: var(--winner);
 }
 
-/* ---------- Équipes ---------- */
+/* ---------- Équipes (affichée sur écran pendant le tournoi : lisible de loin) ---------- */
 
 .teams-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
 }
 
 .team-card {
   background: var(--card);
-  border-radius: 0.5rem;
-  padding: 0.75rem;
-  border-top: 4px solid var(--marigold);
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  border-top: 6px solid var(--marigold);
   box-shadow: 0 1px 4px rgba(28, 23, 38, 0.12);
+}
+
+.team-card:nth-child(4n + 2) {
+  border-top-color: var(--indigo);
+}
+
+.team-card:nth-child(4n + 3) {
+  border-top-color: var(--sky);
+}
+
+.team-card:nth-child(4n) {
+  border-top-color: var(--pink);
+}
+
+.team-card h3 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 0.6rem;
+}
+
+.team-card ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.team-card li {
+  font-size: 1.15rem;
+  font-weight: 700;
+  background: var(--card-tint);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.8rem;
 }
 
 /* ---------- Formulaires ---------- */
@@ -336,8 +373,37 @@ select {
 
 .admin-toolbar {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 0.75rem;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.25rem;
+}
+
+.save-status {
+  flex: 1;
+  margin: 0;
+  min-height: 1.2rem;
+  font-weight: 700;
+  color: var(--winner);
+}
+
+.admin-hint {
+  font-size: 0.85rem;
+  color: #5d5668;
+  margin: 0 0 0.75rem;
+}
+
+.admin-note {
+  background: #fef3df;
+  border: 1px solid var(--marigold);
+  border-radius: 0.5rem;
+  padding: 0.6rem 0.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 .admin-section {
@@ -383,15 +449,36 @@ select {
   margin-top: 0;
 }
 
-.team-form--new {
-  background: #fef3df;
-  border-color: var(--marigold);
+/* Édition des équipes en ligne : Nom | Joueurs | action, Tab passe de champ en champ */
+.team-table {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
-.form-actions {
-  display: flex;
+.team-row {
+  display: grid;
+  grid-template-columns: minmax(10rem, 1fr) minmax(14rem, 2fr) auto;
   gap: 0.5rem;
-  margin-top: 0.75rem;
+  align-items: center;
+}
+
+.team-row input {
+  margin: 0;
+}
+
+.team-row--head {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #5d5668;
+}
+
+.team-form--new {
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border);
 }
 
 .round-block h4 {
@@ -411,8 +498,4 @@ select {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
-}
-
-.result-form button {
-  margin-top: 0.5rem;
 }

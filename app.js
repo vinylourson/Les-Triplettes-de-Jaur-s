@@ -1,5 +1,6 @@
 const STORAGE_KEY = "triplettes.tournamentData";
 const SESSION_KEY = "triplettes.adminLoggedIn";
+const MAX_TEAMS = 16;
 // SHA-256 du mot de passe admin. Pour le changer :
 // printf '%s' "nouveau-mot-de-passe" | shasum -a 256
 const ADMIN_PASSWORD_HASH = "0594adb38afa2a21fa382ef99d5d9807b6e0c6e273280cec87be5a22b3ef8b31";
@@ -87,6 +88,8 @@ function isAdmin() {
   return sessionStorage.getItem(SESSION_KEY) === "true";
 }
 
+/* ---------- Vues publiques ---------- */
+
 function renderChart() {
   const warmupContainer = document.getElementById("warmup-list");
   warmupContainer.innerHTML = state.warmup.map(renderMatchCard).join("");
@@ -141,6 +144,8 @@ function renderTeams() {
     .join("");
 }
 
+/* ---------- Back-office ---------- */
+
 function renderAdmin() {
   const authContainer = document.getElementById("auth-container");
   const adminPanel = document.getElementById("admin-panel");
@@ -154,31 +159,74 @@ function renderAdmin() {
   authContainer.classList.add("hidden");
   adminPanel.classList.remove("hidden");
 
-  document.getElementById("admin-teams").innerHTML = `${state.teams
-    .map((team, index) => renderTeamForm(team, index))
-    .join("")}${renderTeamForm(null, "new")}`;
+  renderAdminTeams();
+  renderAdminMatches();
+}
 
-  document.querySelectorAll(".team-form").forEach((form) => {
-    form.addEventListener("submit", saveTeam);
-  });
-  document.querySelectorAll(".team-delete").forEach((button) => {
-    button.addEventListener("click", deleteTeam);
-  });
+function renderAdminTeams() {
+  const rows = state.teams.map((team, index) => renderTeamRow(team, index)).join("");
+  const addBlock =
+    state.teams.length >= MAX_TEAMS
+      ? `<p class="admin-note">Nombre maximum d'équipes atteint (${MAX_TEAMS}).</p>`
+      : `<form class="team-row team-form--new">
+          <input type="text" name="name" aria-label="Nom de la nouvelle équipe" placeholder="Nouvelle équipe" required />
+          <input type="text" name="members" aria-label="Joueurs de la nouvelle équipe" placeholder="Joueurs (séparés par des virgules)" />
+          <button type="submit">Ajouter</button>
+        </form>`;
+
+  document.getElementById("admin-teams").innerHTML = `<div class="team-row team-row--head" aria-hidden="true">
+      <span>Nom de l'équipe</span><span>Joueurs (séparés par des virgules)</span><span></span>
+    </div>${rows}${addBlock}`;
+
+  document.getElementById("rebuild-schedule-button").disabled = state.teams.length !== MAX_TEAMS;
+}
+
+function renderTeamRow(team, index) {
+  return `<div class="team-row" data-index="${index}">
+      <input type="text" name="name" value="${team.name}" aria-label="Nom de l'équipe ${index + 1}" required />
+      <input type="text" name="members" value="${team.members.join(", ")}" aria-label="Joueurs de l'équipe ${index + 1}" />
+      <button type="button" class="team-delete" data-index="${index}" aria-label="Supprimer ${team.name}">Supprimer</button>
+    </div>`;
+}
+
+function renderAdminMatches() {
+  const focused = captureAdminFocus();
 
   document.getElementById("admin-warmup").innerHTML = state.warmup.map((match) => renderMatchForm(match, "warmup")).join("");
 
-  document.getElementById("admin-bracket").innerHTML = state.rounds
-    .map(
-      (round) =>
-        `<div class="round-block"><h4>${round.label}</h4><div class="admin-grid">${round.matches
-          .map((match) => renderMatchForm(match, round.id))
-          .join("")}</div></div>`
-    )
-    .join("");
+  const bracketContainer = document.getElementById("admin-bracket");
+  if (state.teams.length !== MAX_TEAMS) {
+    bracketContainer.innerHTML = `<p class="admin-note">La saisie du tableau final nécessite exactement ${MAX_TEAMS} équipes (actuellement ${state.teams.length}).</p>`;
+  } else {
+    bracketContainer.innerHTML = state.rounds
+      .map(
+        (round) =>
+          `<div class="round-block"><h4>${round.label}</h4><div class="admin-grid">${round.matches
+            .map((match) => renderMatchForm(match, round.id))
+            .join("")}</div></div>`
+      )
+      .join("");
+  }
 
-  document.querySelectorAll(".result-form").forEach((form) => {
-    form.addEventListener("submit", updateMatch);
-  });
+  restoreAdminFocus(focused);
+}
+
+// La saisie est conservée au clavier : si un champ de match avait le focus
+// avant un re-rendu (propagation des vainqueurs), on le lui redonne.
+function captureAdminFocus() {
+  const active = document.activeElement;
+  const form = active && active.closest ? active.closest(".result-form") : null;
+  return form ? { matchId: form.dataset.matchId, field: active.name } : null;
+}
+
+function restoreAdminFocus(focused) {
+  if (!focused) {
+    return;
+  }
+  const el = document.querySelector(`.result-form[data-match-id="${focused.matchId}"] [name="${focused.field}"]`);
+  if (el) {
+    el.focus();
+  }
 }
 
 function renderMatchForm(match, section) {
@@ -199,60 +247,120 @@ function renderMatchForm(match, section) {
       <label>Vainqueur
         <select name="winner">${winnerOptions}</select>
       </label>
-      <button type="submit">Enregistrer</button>
     </form>`;
 }
 
-function renderTeamForm(team, index) {
-  const isNew = index === "new";
-  return `<form class="team-form form-card${isNew ? " team-form--new" : ""}" data-index="${index}">
-      ${isNew ? "<h4>Ajouter une équipe</h4>" : ""}
-      <label>Nom de l'équipe
-        <input type="text" name="name" value="${team ? team.name : ""}" required />
-      </label>
-      <label>Joueurs (séparés par des virgules)
-        <input type="text" name="members" value="${team ? team.members.join(", ") : ""}" required />
-      </label>
-      <div class="form-actions">
-        <button type="submit">${isNew ? "Ajouter" : "Enregistrer"}</button>
-        ${isNew ? "" : `<button type="button" class="team-delete" data-index="${index}">Supprimer</button>`}
-      </div>
-    </form>`;
+/* ---------- Actions back-office ---------- */
+
+function setupAdmin() {
+  const teamsContainer = document.getElementById("admin-teams");
+
+  // Édition en ligne : chaque champ s'enregistre dès qu'il est modifié
+  // (Tab ou clic ailleurs), sans bouton à presser.
+  teamsContainer.addEventListener("change", (event) => {
+    const row = event.target.closest(".team-row[data-index]");
+    if (!row) {
+      return;
+    }
+    const team = state.teams[Number(row.dataset.index)];
+
+    if (event.target.name === "name") {
+      const name = event.target.value.trim();
+      if (!name) {
+        event.target.value = team.name;
+        return;
+      }
+      if (name !== team.name) {
+        renameTeamInMatches(team.name, name);
+        team.name = name;
+        renderChart();
+        renderAdminMatches();
+      }
+    } else {
+      team.members = event.target.value
+        .split(",")
+        .map((member) => member.trim())
+        .filter(Boolean);
+    }
+
+    persist();
+    renderTeams();
+    announceSave();
+  });
+
+  teamsContainer.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.elements.name.value.trim();
+    if (!name || state.teams.length >= MAX_TEAMS) {
+      return;
+    }
+    const members = form.elements.members.value
+      .split(",")
+      .map((member) => member.trim())
+      .filter(Boolean);
+
+    state.teams.push({ name, members });
+    persist();
+    renderTeams();
+    renderAdminTeams();
+    renderAdminMatches();
+    announceSave();
+
+    const nextInput = teamsContainer.querySelector('.team-form--new input[name="name"]');
+    if (nextInput) {
+      nextInput.focus();
+    }
+  });
+
+  teamsContainer.addEventListener("click", (event) => {
+    const button = event.target.closest(".team-delete");
+    if (button) {
+      deleteTeam(Number(button.dataset.index));
+    }
+  });
+
+  ["admin-warmup", "admin-bracket"].forEach((id) => {
+    document.getElementById(id).addEventListener("change", (event) => {
+      const form = event.target.closest(".result-form");
+      if (form && form.checkValidity()) {
+        applyMatchForm(form);
+      }
+    });
+  });
+
+  document.getElementById("rebuild-schedule-button").addEventListener("click", rebuildSchedule);
 }
 
-function saveTeam(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const name = form.elements.name.value.trim();
-  const members = form.elements.members.value
-    .split(",")
-    .map((member) => member.trim())
-    .filter(Boolean);
+function applyMatchForm(form) {
+  const section = form.dataset.section;
+  const matches = section === "warmup" ? state.warmup : state.rounds.find((round) => round.id === section).matches;
+  const match = matches.find((item) => item.id === form.dataset.matchId);
 
-  if (!name) {
+  if (!match) {
     return;
   }
 
-  const index = form.dataset.index;
-  if (index === "new") {
-    state.teams.push({ name, members });
-  } else {
-    const team = state.teams[Number(index)];
-    if (team.name !== name) {
-      renameTeamInMatches(team.name, name);
-    }
-    team.name = name;
-    team.members = members;
+  const winner = form.elements.winner.value;
+  if (winner && winner !== match.teamA && winner !== match.teamB) {
+    return;
+  }
+
+  match.scoreA = Number(form.elements.scoreA.value);
+  match.scoreB = Number(form.elements.scoreB.value);
+  match.winner = winner;
+
+  if (section !== "warmup") {
+    propagateWinners();
+    renderAdminMatches();
   }
 
   persist();
-  renderTeams();
   renderChart();
-  renderAdmin();
+  announceSave();
 }
 
-function deleteTeam(event) {
-  const index = Number(event.currentTarget.dataset.index);
+function deleteTeam(index) {
   const team = state.teams[index];
   if (!confirm(`Supprimer l'équipe « ${team.name} » ?`)) {
     return;
@@ -265,7 +373,9 @@ function deleteTeam(event) {
   persist();
   renderTeams();
   renderChart();
-  renderAdmin();
+  renderAdminTeams();
+  renderAdminMatches();
+  announceSave();
 }
 
 function renameTeamInMatches(oldName, newName) {
@@ -315,6 +425,9 @@ function propagateWinners() {
 }
 
 function rebuildSchedule() {
+  if (state.teams.length !== MAX_TEAMS) {
+    return;
+  }
   if (!confirm("Régénérer le tableau à partir des équipes actuelles ? Tous les scores seront remis à zéro.")) {
     return;
   }
@@ -325,42 +438,21 @@ function rebuildSchedule() {
 
   persist();
   renderChart();
-  renderAdmin();
+  renderAdminMatches();
+  announceSave();
 }
 
-function updateMatch(event) {
-  event.preventDefault();
-  const form = event.currentTarget;
-  const section = form.dataset.section;
-  const matchId = form.dataset.matchId;
-
-  const scoreA = Number(form.elements.scoreA.value);
-  const scoreB = Number(form.elements.scoreB.value);
-  const winner = form.elements.winner.value;
-
-  const matches = section === "warmup" ? state.warmup : state.rounds.find((round) => round.id === section).matches;
-  const match = matches.find((item) => item.id === matchId);
-
-  if (!match) {
-    return;
-  }
-
-  if (winner && winner !== match.teamA && winner !== match.teamB) {
-    return;
-  }
-
-  match.scoreA = scoreA;
-  match.scoreB = scoreB;
-  match.winner = winner;
-
-  if (section !== "warmup") {
-    propagateWinners();
-  }
-
-  persist();
-  renderChart();
-  renderAdmin();
+let saveStatusTimer;
+function announceSave() {
+  const status = document.getElementById("save-status");
+  status.textContent = "✓ Modifications enregistrées";
+  clearTimeout(saveStatusTimer);
+  saveStatusTimer = setTimeout(() => {
+    status.textContent = "";
+  }, 2000);
 }
+
+/* ---------- Navigation & authentification ---------- */
 
 function setupNavigation() {
   document.querySelectorAll(".nav-button").forEach((button) => {
@@ -380,7 +472,8 @@ function setupNavigation() {
 function setupAuth() {
   const feedback = document.getElementById("auth-feedback");
 
-  document.getElementById("login-button").addEventListener("click", async () => {
+  document.getElementById("auth-container").addEventListener("submit", async (event) => {
+    event.preventDefault();
     const passwordInput = document.getElementById("password");
     if ((await hashPassword(passwordInput.value)) === ADMIN_PASSWORD_HASH) {
       sessionStorage.setItem(SESSION_KEY, "true");
@@ -403,7 +496,7 @@ function bootstrap() {
   renderTeams();
   setupNavigation();
   setupAuth();
-  document.getElementById("rebuild-schedule-button").addEventListener("click", rebuildSchedule);
+  setupAdmin();
   renderAdmin();
   persist();
 }

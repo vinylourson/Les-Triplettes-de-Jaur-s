@@ -22,7 +22,7 @@
 
     <main>
       <section id="chart-view" class="view">
-        <h2>Tour d'échauffement</h2>
+        <h2>Tour de chauffe</h2>
         <div id="warmup-list" class="match-grid"></div>
 
         <h2>Tableau final (à partir des 1/8)</h2>
@@ -36,27 +36,29 @@
 
       <section id="admin-view" class="view hidden">
         <h2>Back-office</h2>
-        <div id="auth-container" class="auth-card">
+        <form id="auth-container" class="auth-card">
           <p>Accès protégé requis pour modifier les résultats.</p>
           <label for="password">Mot de passe</label>
           <input id="password" type="password" autocomplete="current-password" />
-          <button id="login-button">Se connecter</button>
+          <button id="login-button" type="submit">Se connecter</button>
           <p id="auth-feedback" class="feedback" role="alert"></p>
-        </div>
+        </form>
 
         <div id="admin-panel" class="hidden">
           <div class="admin-toolbar">
+            <p id="save-status" class="save-status" role="status" aria-live="polite"></p>
             <button id="logout-button" class="button-secondary">Se déconnecter</button>
           </div>
+          <p class="admin-hint">Saisie au clavier : Tab pour passer d'un champ à l'autre — chaque modification est enregistrée automatiquement.</p>
           <details class="admin-section" open>
             <summary>Gérer les équipes</summary>
             <div class="admin-section-body">
-              <div id="admin-teams" class="admin-grid"></div>
+              <div id="admin-teams" class="team-table"></div>
               <button id="rebuild-schedule-button" class="button-secondary">Régénérer le tableau depuis les équipes</button>
             </div>
           </details>
           <details class="admin-section">
-            <summary>Tour d'échauffement</summary>
+            <summary>Tour de chauffe</summary>
             <div class="admin-section-body">
               <div id="admin-warmup" class="admin-grid"></div>
             </div>
