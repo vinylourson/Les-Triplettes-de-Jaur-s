@@ -1,6 +1,15 @@
 const STORAGE_KEY = "triplettes.tournamentData";
 const SESSION_KEY = "triplettes.adminLoggedIn";
-const ADMIN_PASSWORD = "petanque-admin";
+// SHA-256 du mot de passe admin. Pour le changer :
+// printf '%s' "nouveau-mot-de-passe" | shasum -a 256
+const ADMIN_PASSWORD_HASH = "90ed10581fd0fd202f3c1ace134c08af5bda4d2d3d39fa2ff4c62892eab29e67";
+
+async function hashPassword(password) {
+  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(password));
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+}
 
 const defaultData = {
   teams: [
@@ -320,9 +329,9 @@ function setupNavigation() {
 function setupAuth() {
   const feedback = document.getElementById("auth-feedback");
 
-  document.getElementById("login-button").addEventListener("click", () => {
+  document.getElementById("login-button").addEventListener("click", async () => {
     const passwordInput = document.getElementById("password");
-    if (passwordInput.value === ADMIN_PASSWORD) {
+    if ((await hashPassword(passwordInput.value)) === ADMIN_PASSWORD_HASH) {
       sessionStorage.setItem(SESSION_KEY, "true");
       passwordInput.value = "";
       feedback.textContent = "";
