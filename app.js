@@ -2,7 +2,7 @@ const STORAGE_KEY = "triplettes.tournamentData";
 const SESSION_KEY = "triplettes.adminLoggedIn";
 // SHA-256 du mot de passe admin. Pour le changer :
 // printf '%s' "nouveau-mot-de-passe" | shasum -a 256
-const ADMIN_PASSWORD_HASH = "90ed10581fd0fd202f3c1ace134c08af5bda4d2d3d39fa2ff4c62892eab29e67";
+const ADMIN_PASSWORD_HASH = "0594adb38afa2a21fa382ef99d5d9807b6e0c6e273280cec87be5a22b3ef8b31";
 
 async function hashPassword(password) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(password));
