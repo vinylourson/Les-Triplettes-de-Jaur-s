@@ -170,9 +170,9 @@ function renderAdmin() {
   document.getElementById("admin-bracket").innerHTML = state.rounds
     .map(
       (round) =>
-        `<div class="form-card"><h4>${round.label}</h4>${round.matches
+        `<div class="round-block"><h4>${round.label}</h4><div class="admin-grid">${round.matches
           .map((match) => renderMatchForm(match, round.id))
-          .join("")}</div>`
+          .join("")}</div></div>`
     )
     .join("");
 
@@ -186,28 +186,37 @@ function renderMatchForm(match, section) {
     .map((teamName) => `<option ${teamName === match.winner ? "selected" : ""} value="${teamName}">${teamName || "Aucun"}</option>`)
     .join("");
 
-  return `<form class="result-form" data-section="${section}" data-match-id="${match.id}">
-      <p><strong>${match.teamA}</strong> vs <strong>${match.teamB}</strong></p>
-      <label>Score ${match.teamA}</label>
-      <input type="number" min="0" name="scoreA" value="${match.scoreA}" required />
-      <label>Score ${match.teamB}</label>
-      <input type="number" min="0" name="scoreB" value="${match.scoreB}" required />
-      <label>Vainqueur</label>
-      <select name="winner">${winnerOptions}</select>
+  return `<form class="result-form form-card" data-section="${section}" data-match-id="${match.id}">
+      <p class="match-title"><strong>${match.teamA}</strong> vs <strong>${match.teamB}</strong></p>
+      <div class="score-row">
+        <label>Score
+          <input type="number" min="0" name="scoreA" value="${match.scoreA}" aria-label="Score ${match.teamA}" required />
+        </label>
+        <label>Score
+          <input type="number" min="0" name="scoreB" value="${match.scoreB}" aria-label="Score ${match.teamB}" required />
+        </label>
+      </div>
+      <label>Vainqueur
+        <select name="winner">${winnerOptions}</select>
+      </label>
       <button type="submit">Enregistrer</button>
     </form>`;
 }
 
 function renderTeamForm(team, index) {
   const isNew = index === "new";
-  return `<form class="team-form form-card" data-index="${index}">
+  return `<form class="team-form form-card${isNew ? " team-form--new" : ""}" data-index="${index}">
       ${isNew ? "<h4>Ajouter une équipe</h4>" : ""}
-      <label>Nom de l'équipe</label>
-      <input type="text" name="name" value="${team ? team.name : ""}" required />
-      <label>Joueurs (séparés par des virgules)</label>
-      <input type="text" name="members" value="${team ? team.members.join(", ") : ""}" required />
-      <button type="submit">${isNew ? "Ajouter" : "Enregistrer"}</button>
-      ${isNew ? "" : `<button type="button" class="team-delete" data-index="${index}">Supprimer</button>`}
+      <label>Nom de l'équipe
+        <input type="text" name="name" value="${team ? team.name : ""}" required />
+      </label>
+      <label>Joueurs (séparés par des virgules)
+        <input type="text" name="members" value="${team ? team.members.join(", ") : ""}" required />
+      </label>
+      <div class="form-actions">
+        <button type="submit">${isNew ? "Ajouter" : "Enregistrer"}</button>
+        ${isNew ? "" : `<button type="button" class="team-delete" data-index="${index}">Supprimer</button>`}
+      </div>
     </form>`;
 }
 

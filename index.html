@@ -4,12 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Les Triplettes de Jaurès</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header>
       <h1>Les Triplettes de Jaurès</h1>
-      <p>Tableau des résultats du tournoi de pétanque</p>
+      <p class="tagline">La journée pétanque, mais pas que !</p>
       <nav>
         <button class="nav-button active" data-view="chart">Tableau</button>
         <button class="nav-button" data-view="teams">Équipes</button>
@@ -33,31 +36,37 @@
 
       <section id="admin-view" class="view hidden">
         <h2>Back-office</h2>
-        <div id="auth-container">
+        <div id="auth-container" class="auth-card">
           <p>Accès protégé requis pour modifier les résultats.</p>
           <label for="password">Mot de passe</label>
           <input id="password" type="password" autocomplete="current-password" />
           <button id="login-button">Se connecter</button>
-          <p id="auth-feedback" class="feedback"></p>
+          <p id="auth-feedback" class="feedback" role="alert"></p>
         </div>
 
         <div id="admin-panel" class="hidden">
           <div class="admin-toolbar">
-            <button id="logout-button">Se déconnecter</button>
+            <button id="logout-button" class="button-secondary">Se déconnecter</button>
           </div>
-          <div>
-            <h3>Gérer les équipes</h3>
-            <div id="admin-teams"></div>
-            <button id="rebuild-schedule-button">Régénérer le tableau depuis les équipes</button>
-          </div>
-          <div>
-            <h3>Modifier le tour d'échauffement</h3>
-            <div id="admin-warmup"></div>
-          </div>
-          <div>
-            <h3>Modifier le tableau final</h3>
-            <div id="admin-bracket"></div>
-          </div>
+          <details class="admin-section" open>
+            <summary>Gérer les équipes</summary>
+            <div class="admin-section-body">
+              <div id="admin-teams" class="admin-grid"></div>
+              <button id="rebuild-schedule-button" class="button-secondary">Régénérer le tableau depuis les équipes</button>
+            </div>
+          </details>
+          <details class="admin-section">
+            <summary>Tour d'échauffement</summary>
+            <div class="admin-section-body">
+              <div id="admin-warmup" class="admin-grid"></div>
+            </div>
+          </details>
+          <details class="admin-section">
+            <summary>Tableau final</summary>
+            <div class="admin-section-body">
+              <div id="admin-bracket"></div>
+            </div>
+          </details>
         </div>
       </section>
     </main>
