@@ -37,11 +37,12 @@
       <section id="admin-view" class="view hidden">
         <h2>Back-office</h2>
         <form id="auth-container" class="auth-card">
-          <p>Accès protégé requis pour modifier les résultats.</p>
-          <label for="password">Mot de passe</label>
-          <input id="password" type="password" autocomplete="current-password" />
+          <p>Accès réservé : collez le jeton d'accès fourni par l'organisateur.</p>
+          <label for="password">Jeton d'accès</label>
+          <input id="password" type="password" autocomplete="off" />
           <button id="login-button" type="submit">Se connecter</button>
           <p id="auth-feedback" class="feedback" role="alert"></p>
+          <p class="auth-note">Le jeton n'est conservé que dans cet onglet, le temps de la session.</p>
         </form>
 
         <div id="admin-panel" class="hidden">

@@ -1,18 +1,18 @@
 const STORAGE_KEY = "triplettes.tournamentData";
-const SESSION_KEY = "triplettes.adminLoggedIn";
+const SESSION_KEY = "triplettes.adminToken";
 const MAX_TEAMS = 16;
 const BYE = "Exempt";
 const TBD = "À déterminer";
-// SHA-256 du mot de passe admin. Pour le changer :
-// printf '%s' "nouveau-mot-de-passe" | shasum -a 256
-const ADMIN_PASSWORD_HASH = "0594adb38afa2a21fa382ef99d5d9807b6e0c6e273280cec87be5a22b3ef8b31";
 
-async function hashPassword(password) {
-  const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(password));
-  return Array.from(new Uint8Array(digest))
-    .map((byte) => byte.toString(16).padStart(2, "0"))
-    .join("");
-}
+// Les données vivent dans data.json, versionné dans le dépôt GitHub : chaque
+// enregistrement est un commit. Les admins se connectent avec un jeton
+// d'accès « fine-grained » limité à ce dépôt (permission Contents en
+// lecture/écriture), distribué comme un mot de passe.
+const REPO_API = "https://api.github.com/repos/vinylourson/Les-Triplettes-de-Jaur-s";
+const DATA_API = `${REPO_API}/contents/data.json`;
+const BRANCH = "main";
+const POLL_INTERVAL_MS = 60000;
+const SAVE_DEBOUNCE_MS = 1500;
 
 const defaultData = {
   teams: [
@@ -108,7 +108,7 @@ function buildSchedule(teamNames) {
   return { warmup, rounds };
 }
 
-function initData() {
+function loadCachedData() {
   const fromStorage = localStorage.getItem(STORAGE_KEY);
   if (fromStorage) {
     return JSON.parse(fromStorage);
@@ -118,18 +118,168 @@ function initData() {
   return { teams: defaultData.teams, warmup: schedule.warmup, rounds: schedule.rounds, drawCount: defaultData.teams.length };
 }
 
-let state = initData();
+let state = loadCachedData();
 
-function persist() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+function getToken() {
+  return sessionStorage.getItem(SESSION_KEY) || "";
 }
 
 function isAdmin() {
-  return sessionStorage.getItem(SESSION_KEY) === "true";
+  return Boolean(getToken());
 }
 
 function drawIsStale() {
   return state.drawCount !== undefined && state.drawCount !== state.teams.length;
+}
+
+/* ---------- Synchronisation GitHub ---------- */
+
+let remoteSha = null;
+let remoteEtag = null;
+
+function decodeContent(base64) {
+  return new TextDecoder().decode(Uint8Array.from(atob(base64), (c) => c.charCodeAt(0)));
+}
+
+function encodeContent(text) {
+  let binary = "";
+  new TextEncoder().encode(text).forEach((byte) => {
+    binary += String.fromCharCode(byte);
+  });
+  return btoa(binary);
+}
+
+function apiHeaders() {
+  const headers = { Accept: "application/vnd.github+json" };
+  const token = getToken();
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  return headers;
+}
+
+// Lit data.json ; en mode conditionnel, renvoie null si rien n'a changé
+// (réponse 304, qui ne compte pas dans le quota d'API anonyme).
+async function fetchRemoteData({ conditional = false } = {}) {
+  const headers = apiHeaders();
+  if (conditional && remoteEtag) {
+    headers["If-None-Match"] = remoteEtag;
+  }
+  const response = await fetch(`${DATA_API}?ref=${BRANCH}`, { headers, cache: "no-store" });
+  if (response.status === 304) {
+    return null;
+  }
+  if (!response.ok) {
+    throw new Error(`GitHub ${response.status}`);
+  }
+  remoteEtag = response.headers.get("ETag");
+  const payload = await response.json();
+  remoteSha = payload.sha;
+  return JSON.parse(decodeContent(payload.content));
+}
+
+// Écrit data.json (un commit par enregistrement). En cas de conflit de SHA
+// (un autre admin a enregistré entre-temps), on récupère le SHA à jour et on
+// réessaie une fois : dernière écriture gagne.
+async function pushRemoteData() {
+  if (remoteSha === null) {
+    await fetchRemoteData();
+  }
+
+  const body = {
+    message: "Mise à jour des résultats via le back-office",
+    content: encodeContent(JSON.stringify(state, null, 2)),
+    branch: BRANCH,
+    sha: remoteSha
+  };
+  const put = () =>
+    fetch(DATA_API, { method: "PUT", headers: apiHeaders(), body: JSON.stringify(body) });
+
+  let response = await put();
+  if (response.status === 409 || response.status === 422) {
+    await fetchRemoteData();
+    body.sha = remoteSha;
+    response = await put();
+  }
+  if (!response.ok) {
+    throw new Error(`GitHub ${response.status}`);
+  }
+  const payload = await response.json();
+  remoteSha = payload.content.sha;
+  remoteEtag = null;
+}
+
+let saveTimer;
+let saving = false;
+let pendingSave = false;
+
+function persist() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if (!isAdmin()) {
+    return;
+  }
+  setSaveStatus("pending");
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveRemote, SAVE_DEBOUNCE_MS);
+}
+
+async function saveRemote() {
+  if (saving) {
+    pendingSave = true;
+    return;
+  }
+  saving = true;
+  try {
+    await pushRemoteData();
+    setSaveStatus("saved");
+  } catch (error) {
+    setSaveStatus("error");
+  } finally {
+    saving = false;
+    if (pendingSave) {
+      pendingSave = false;
+      saveRemote();
+    }
+  }
+}
+
+// Les visiteurs (écran du tournoi inclus) récupèrent les mises à jour
+// périodiquement. Pas de pull côté admin : il est la source des écritures.
+async function refreshFromRemote() {
+  if (isAdmin()) {
+    return;
+  }
+  try {
+    const remote = await fetchRemoteData({ conditional: true });
+    if (remote) {
+      state = remote;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderChart();
+      renderTeams();
+    }
+  } catch (error) {
+    // hors-ligne ou quota API : on garde l'affichage courant
+  }
+}
+
+const SAVE_MESSAGES = {
+  pending: { text: "Enregistrement…", className: "save-status" },
+  saved: { text: "✓ Enregistré sur GitHub", className: "save-status save-status--ok" },
+  error: { text: "⚠ Échec de l'enregistrement — vérifiez le jeton ou la connexion", className: "save-status save-status--error" }
+};
+
+let saveStatusTimer;
+function setSaveStatus(kind) {
+  const status = document.getElementById("save-status");
+  const config = SAVE_MESSAGES[kind];
+  status.textContent = config.text;
+  status.className = config.className;
+  clearTimeout(saveStatusTimer);
+  if (kind === "saved") {
+    saveStatusTimer = setTimeout(() => {
+      status.textContent = "";
+    }, 3000);
+  }
 }
 
 /* ---------- Vues publiques ---------- */
@@ -344,7 +494,6 @@ function setupAdmin() {
 
     persist();
     renderTeams();
-    announceSave();
   });
 
   teamsContainer.addEventListener("submit", (event) => {
@@ -364,7 +513,6 @@ function setupAdmin() {
     renderTeams();
     renderAdminTeams();
     renderAdminMatches();
-    announceSave();
 
     const nextInput = teamsContainer.querySelector('.team-form--new input[name="name"]');
     if (nextInput) {
@@ -416,7 +564,6 @@ function applyMatchForm(form) {
 
   persist();
   renderChart();
-  announceSave();
 }
 
 function deleteTeam(index) {
@@ -434,7 +581,6 @@ function deleteTeam(index) {
   renderChart();
   renderAdminTeams();
   renderAdminMatches();
-  announceSave();
 }
 
 function renameTeamInMatches(oldName, newName) {
@@ -500,17 +646,6 @@ function rebuildSchedule() {
   persist();
   renderChart();
   renderAdminMatches();
-  announceSave();
-}
-
-let saveStatusTimer;
-function announceSave() {
-  const status = document.getElementById("save-status");
-  status.textContent = "✓ Modifications enregistrées";
-  clearTimeout(saveStatusTimer);
-  saveStatusTimer = setTimeout(() => {
-    status.textContent = "";
-  }, 2000);
 }
 
 /* ---------- Navigation & authentification ---------- */
@@ -535,15 +670,50 @@ function setupAuth() {
 
   document.getElementById("auth-container").addEventListener("submit", async (event) => {
     event.preventDefault();
-    const passwordInput = document.getElementById("password");
-    if ((await hashPassword(passwordInput.value)) === ADMIN_PASSWORD_HASH) {
-      sessionStorage.setItem(SESSION_KEY, "true");
-      passwordInput.value = "";
-      feedback.textContent = "";
-      renderAdmin();
+    const tokenInput = document.getElementById("password");
+    const token = tokenInput.value.trim();
+    if (!token) {
       return;
     }
-    feedback.textContent = "Mot de passe incorrect.";
+
+    feedback.textContent = "Vérification du jeton…";
+    try {
+      const response = await fetch(REPO_API, {
+        headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${token}` },
+        cache: "no-store"
+      });
+      if (!response.ok) {
+        feedback.textContent = "Jeton invalide.";
+        return;
+      }
+      const repo = await response.json();
+      if (!repo.permissions || !repo.permissions.push) {
+        feedback.textContent = "Ce jeton n'a pas le droit d'écriture sur le dépôt.";
+        return;
+      }
+    } catch (error) {
+      feedback.textContent = "Impossible de joindre GitHub — vérifiez la connexion.";
+      return;
+    }
+
+    sessionStorage.setItem(SESSION_KEY, token);
+    tokenInput.value = "";
+    feedback.textContent = "";
+
+    // Repartir de la version du dépôt avant d'éditer (SHA à jour inclus).
+    try {
+      const remote = await fetchRemoteData();
+      if (remote) {
+        state = remote;
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        renderChart();
+        renderTeams();
+      }
+    } catch (error) {
+      // data.json absent ou illisible : on gardera l'état local, le premier
+      // enregistrement le publiera
+    }
+    renderAdmin();
   });
 
   document.getElementById("logout-button").addEventListener("click", () => {
@@ -552,14 +722,30 @@ function setupAuth() {
   });
 }
 
-function bootstrap() {
+async function bootstrap() {
   renderChart();
   renderTeams();
   setupNavigation();
   setupAuth();
   setupAdmin();
   renderAdmin();
-  persist();
+
+  try {
+    const remote = await fetchRemoteData();
+    if (remote) {
+      state = remote;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderChart();
+      renderTeams();
+      if (isAdmin()) {
+        renderAdmin();
+      }
+    }
+  } catch (error) {
+    // hors-ligne ou quota API : on affiche le cache local
+  }
+
+  setInterval(refreshFromRemote, POLL_INTERVAL_MS);
 }
 
 bootstrap();
