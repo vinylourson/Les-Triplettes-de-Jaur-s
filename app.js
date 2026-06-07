@@ -1,6 +1,8 @@
 const STORAGE_KEY = "triplettes.tournamentData";
 const SESSION_KEY = "triplettes.adminLoggedIn";
 const MAX_TEAMS = 16;
+const BYE = "Exempt";
+const TBD = "À déterminer";
 // SHA-256 du mot de passe admin. Pour le changer :
 // printf '%s' "nouveau-mot-de-passe" | shasum -a 256
 const ADMIN_PASSWORD_HASH = "0594adb38afa2a21fa382ef99d5d9807b6e0c6e273280cec87be5a22b3ef8b31";
@@ -30,40 +32,78 @@ const defaultData = {
     { name: "La Boule Noire", members: ["Cyril", "Diane"] },
     { name: "Petanq'Attack", members: ["Eli", "Fiona"] },
     { name: "Les Finalistes", members: ["Gaël", "Hana"] }
-  ],
-  warmup: [],
-  rounds: []
+  ]
 };
 
 function makeMatch(id, teamA, teamB) {
   return { id, teamA, teamB, scoreA: 0, scoreB: 0, winner: "" };
 }
 
+function shuffle(items) {
+  const arr = [...items];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function roundLabel(matchCount) {
+  if (matchCount === 1) return "Finale";
+  if (matchCount === 2) return "1/2 finale";
+  return `1/${matchCount} de finale`;
+}
+
+// Tirage au sort complet : paires du tour de chauffe et placement dans le
+// tableau final. La taille du tableau est la puissance de 2 immédiatement
+// supérieure au nombre d'équipes ; les places vacantes sont des exemptions
+// (« Exempt ») réparties au plus une par match et qualifient d'office.
 function buildSchedule(teamNames) {
+  const warmupOrder = shuffle(teamNames);
+  if (warmupOrder.length % 2 === 1) {
+    warmupOrder.push(BYE);
+  }
   const warmup = [];
-  for (let i = 0; i < teamNames.length; i += 2) {
-    warmup.push(makeMatch(`warmup-${i / 2 + 1}`, teamNames[i], teamNames[i + 1] ?? "À déterminer"));
+  for (let i = 0; i < warmupOrder.length; i += 2) {
+    warmup.push(makeMatch(`warmup-${i / 2 + 1}`, warmupOrder[i], warmupOrder[i + 1]));
   }
 
-  const roundOf16 = [];
-  for (let i = 0; i < 16; i += 2) {
-    roundOf16.push(makeMatch(`1-8-${i / 2 + 1}`, teamNames[i] ?? "À déterminer", teamNames[i + 1] ?? "À déterminer"));
+  let size = 2;
+  while (size < teamNames.length) {
+    size *= 2;
   }
+  const order = shuffle(teamNames);
+  const byes = size - order.length;
+  const firstRound = [];
+  let cursor = 0;
+  for (let m = 0; m < size / 2; m++) {
+    if (m < byes) {
+      firstRound.push(makeMatch("", order[cursor++], BYE));
+    } else {
+      firstRound.push(makeMatch("", order[cursor++], order[cursor++]));
+    }
+  }
+  const mixed = shuffle(firstRound);
+  mixed.forEach((match) => {
+    if (match.teamB === BYE) {
+      match.winner = match.teamA;
+    }
+  });
 
-  const rounds = [
-    { id: "round16", label: "1/8 de finale", matches: roundOf16 },
-    {
-      id: "quarter",
-      label: "1/4 de finale",
-      matches: Array.from({ length: 4 }, (_, i) => makeMatch(`1-4-${i + 1}`, "À déterminer", "À déterminer"))
-    },
-    {
-      id: "semi",
-      label: "1/2 finale",
-      matches: Array.from({ length: 2 }, (_, i) => makeMatch(`1-2-${i + 1}`, "À déterminer", "À déterminer"))
-    },
-    { id: "final", label: "Finale", matches: [makeMatch("final-1", "À déterminer", "À déterminer")] }
-  ];
+  const rounds = [];
+  let current = mixed;
+  let teamsLeft = size;
+  for (;;) {
+    current.forEach((match, i) => {
+      match.id = `r${teamsLeft}-${i + 1}`;
+    });
+    rounds.push({ id: `round-${teamsLeft}`, label: roundLabel(current.length), matches: current });
+    if (current.length === 1) {
+      break;
+    }
+    teamsLeft /= 2;
+    current = Array.from({ length: current.length / 2 }, () => makeMatch("", TBD, TBD));
+  }
 
   return { warmup, rounds };
 }
@@ -75,7 +115,7 @@ function initData() {
   }
 
   const schedule = buildSchedule(defaultData.teams.map((team) => team.name));
-  return { teams: defaultData.teams, warmup: schedule.warmup, rounds: schedule.rounds };
+  return { teams: defaultData.teams, warmup: schedule.warmup, rounds: schedule.rounds, drawCount: defaultData.teams.length };
 }
 
 let state = initData();
@@ -88,6 +128,10 @@ function isAdmin() {
   return sessionStorage.getItem(SESSION_KEY) === "true";
 }
 
+function drawIsStale() {
+  return state.drawCount !== undefined && state.drawCount !== state.teams.length;
+}
+
 /* ---------- Vues publiques ---------- */
 
 function renderChart() {
@@ -98,12 +142,11 @@ function renderChart() {
   bracketContainer.innerHTML = renderBracket();
 }
 
+// Tableau symétrique générique : pour R tours, 2R-1 colonnes — chaque tour
+// est partagé moitié gauche / moitié droite autour de la finale.
 function renderBracket() {
-  const [round16, quarter, semi, final] = state.rounds;
-  const half = (matches) => [matches.slice(0, matches.length / 2), matches.slice(matches.length / 2)];
-  const [r16Left, r16Right] = half(round16.matches);
-  const [qfLeft, qfRight] = half(quarter.matches);
-  const [sfLeft, sfRight] = half(semi.matches);
+  const rounds = state.rounds;
+  const total = rounds.length;
 
   const slot = (match) => `<div class="match-slot">${renderMatchCard(match)}</div>`;
   const pairs = (matches) => {
@@ -116,22 +159,31 @@ function renderBracket() {
   const column = (label, content, side) =>
     `<section class="bracket-column ${side}"><h3>${label}</h3><div class="bracket-matches">${content}</div></section>`;
 
-  return `<div class="bracket">
-    ${column(round16.label, pairs(r16Left), "side-left")}
-    ${column(quarter.label, pairs(qfLeft), "side-left")}
-    ${column(semi.label, slot(sfLeft[0]), "side-left feeds-final")}
-    ${column(final.label, slot(final.matches[0]), "final-column")}
-    ${column(semi.label, slot(sfRight[0]), "side-right feeds-final")}
-    ${column(quarter.label, pairs(qfRight), "side-right")}
-    ${column(round16.label, pairs(r16Right), "side-right")}
-  </div>`;
+  const leftColumns = [];
+  const rightColumns = [];
+  for (let r = 0; r < total - 1; r++) {
+    const matches = rounds[r].matches;
+    const left = matches.slice(0, matches.length / 2);
+    const right = matches.slice(matches.length / 2);
+    const feeds = r === total - 2 ? " feeds-final" : "";
+    leftColumns.push(column(rounds[r].label, left.length === 1 ? slot(left[0]) : pairs(left), `side-left${feeds}`));
+    rightColumns.unshift(column(rounds[r].label, right.length === 1 ? slot(right[0]) : pairs(right), `side-right${feeds}`));
+  }
+
+  const final = rounds[total - 1];
+  const columns = [...leftColumns, column(final.label, slot(final.matches[0]), "final-column"), ...rightColumns];
+
+  return `<div class="bracket" style="grid-template-columns: repeat(${columns.length}, minmax(150px, 1fr));">${columns.join("")}</div>`;
 }
 
 function renderMatchCard(match) {
-  return `<article class="match-card">
-    <div class="${match.winner === match.teamA ? "winner" : ""}">${match.teamA} : ${match.scoreA}</div>
-    <div class="${match.winner === match.teamB ? "winner" : ""}">${match.teamB} : ${match.scoreB}</div>
-  </article>`;
+  const line = (team, score) => {
+    const classes = [match.winner && match.winner === team ? "winner" : "", team === BYE ? "bye" : ""]
+      .filter(Boolean)
+      .join(" ");
+    return `<div class="${classes}">${team === BYE ? BYE : `${team} : ${score}`}</div>`;
+  };
+  return `<article class="match-card">${line(match.teamA, match.scoreA)}${line(match.teamB, match.scoreB)}</article>`;
 }
 
 function renderTeams() {
@@ -178,7 +230,7 @@ function renderAdminTeams() {
       <span>Nom de l'équipe</span><span>Joueurs (séparés par des virgules)</span><span></span>
     </div>${rows}${addBlock}`;
 
-  document.getElementById("rebuild-schedule-button").disabled = state.teams.length !== MAX_TEAMS;
+  document.getElementById("rebuild-schedule-button").disabled = state.teams.length < 2;
 }
 
 function renderTeamRow(team, index) {
@@ -191,14 +243,16 @@ function renderTeamRow(team, index) {
 
 function renderAdminMatches() {
   const focused = captureAdminFocus();
+  const staleNote = drawIsStale()
+    ? `<p class="admin-note">Le nombre d'équipes (${state.teams.length}) a changé depuis le tirage au sort (${state.drawCount}) — refaites le tirage.</p>`
+    : "";
 
-  document.getElementById("admin-warmup").innerHTML = state.warmup.map((match) => renderMatchForm(match, "warmup")).join("");
+  document.getElementById("admin-warmup").innerHTML =
+    staleNote + `<div class="admin-grid">${state.warmup.map((match) => renderMatchForm(match, "warmup")).join("")}</div>`;
 
-  const bracketContainer = document.getElementById("admin-bracket");
-  if (state.teams.length !== MAX_TEAMS) {
-    bracketContainer.innerHTML = `<p class="admin-note">La saisie du tableau final nécessite exactement ${MAX_TEAMS} équipes (actuellement ${state.teams.length}).</p>`;
-  } else {
-    bracketContainer.innerHTML = state.rounds
+  document.getElementById("admin-bracket").innerHTML =
+    staleNote +
+    state.rounds
       .map(
         (round) =>
           `<div class="round-block"><h4>${round.label}</h4><div class="admin-grid">${round.matches
@@ -206,7 +260,6 @@ function renderAdminMatches() {
             .join("")}</div></div>`
       )
       .join("");
-  }
 
   restoreAdminFocus(focused);
 }
@@ -230,6 +283,12 @@ function restoreAdminFocus(focused) {
 }
 
 function renderMatchForm(match, section) {
+  if (match.teamA === BYE || match.teamB === BYE) {
+    const qualified = match.teamA === BYE ? match.teamB : match.teamA;
+    const note = section === "warmup" ? "Exempt pour ce tour" : "Exempt — qualifié d'office";
+    return `<div class="form-card bye-card"><p class="match-title"><strong>${qualified}</strong></p><p>${note}</p></div>`;
+  }
+
   const winnerOptions = ["", match.teamA, match.teamB]
     .map((teamName) => `<option ${teamName === match.winner ? "selected" : ""} value="${teamName}">${teamName || "Aucun"}</option>`)
     .join("");
@@ -394,8 +453,8 @@ function clearTeamFromMatches(name) {
     if (match.teamA !== name && match.teamB !== name) {
       return;
     }
-    if (match.teamA === name) match.teamA = "À déterminer";
-    if (match.teamB === name) match.teamB = "À déterminer";
+    if (match.teamA === name) match.teamA = TBD;
+    if (match.teamB === name) match.teamB = TBD;
     match.scoreA = 0;
     match.scoreB = 0;
     match.winner = "";
@@ -412,7 +471,7 @@ function propagateWinners() {
       const target = state.rounds[r + 1].matches[Math.floor(i / 2)];
       const side = i % 2 === 0 ? "teamA" : "teamB";
       const scoreKey = i % 2 === 0 ? "scoreA" : "scoreB";
-      const advancing = match.winner || "À déterminer";
+      const advancing = match.winner || TBD;
       if (target[side] !== advancing) {
         if (target.winner === target[side]) {
           target.winner = "";
@@ -425,16 +484,18 @@ function propagateWinners() {
 }
 
 function rebuildSchedule() {
-  if (state.teams.length !== MAX_TEAMS) {
+  if (state.teams.length < 2) {
     return;
   }
-  if (!confirm("Régénérer le tableau à partir des équipes actuelles ? Tous les scores seront remis à zéro.")) {
+  if (!confirm("Tirer au sort le tour de chauffe et le tableau final ? Tous les scores seront remis à zéro.")) {
     return;
   }
 
   const schedule = buildSchedule(state.teams.map((team) => team.name));
   state.warmup = schedule.warmup;
   state.rounds = schedule.rounds;
+  state.drawCount = state.teams.length;
+  propagateWinners();
 
   persist();
   renderChart();

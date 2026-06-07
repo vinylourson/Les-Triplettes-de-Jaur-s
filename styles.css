@@ -168,10 +168,26 @@ summary:focus-visible {
 .bracket {
   --bracket-gap: 2rem;
   display: grid;
-  grid-template-columns: repeat(7, minmax(150px, 1fr));
+  /* grid-template-columns posé en inline par renderBracket() selon le nombre de tours */
   column-gap: var(--bracket-gap);
   overflow-x: auto;
   padding-bottom: 0.5rem;
+}
+
+.bye {
+  color: #5d5668;
+  font-style: italic;
+}
+
+.bye-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-style: dashed;
+}
+
+.bye-card p {
+  margin: 0.15rem 0;
 }
 
 .bracket-column {
