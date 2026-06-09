@@ -1,7 +1,7 @@
 {
   "teams": [
     {
-      "name": "Cochonnet Crew",
+      "name": "Cochonnet Crew [sync-test]",
       "members": [
         "Alice",
         "Bruno"
@@ -166,7 +166,7 @@
     },
     {
       "id": "warmup-7",
-      "teamA": "Cochonnet Crew",
+      "teamA": "Cochonnet Crew [sync-test]",
       "teamB": "Le Cercle Bleu",
       "scoreA": 0,
       "scoreB": 0,
@@ -213,7 +213,7 @@
         {
           "id": "r16-4",
           "teamA": "Petanq'Attack",
-          "teamB": "Cochonnet Crew",
+          "teamB": "Cochonnet Crew [sync-test]",
           "scoreA": 0,
           "scoreB": 0,
           "winner": ""
