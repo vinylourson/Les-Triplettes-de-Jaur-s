@@ -220,7 +220,10 @@ function persist() {
   }
   setSaveStatus("pending");
   clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveRemote, SAVE_DEBOUNCE_MS);
+  saveTimer = setTimeout(() => {
+    saveTimer = null;
+    saveRemote();
+  }, SAVE_DEBOUNCE_MS);
 }
 
 async function saveRemote() {
@@ -260,6 +263,37 @@ async function refreshFromRemote() {
   } catch (error) {
     // hors-ligne ou quota API : on garde l'affichage courant
   }
+}
+
+// Actualisation manuelle (bouton du Tableau) : récupération forcée, sans
+// rechargement de page. Inactive si un enregistrement admin est en attente,
+// pour ne pas écraser une saisie en cours.
+async function manualRefresh() {
+  const button = document.getElementById("refresh-button");
+  if (saving || pendingSave || saveTimer) {
+    setRefreshStatus("Enregistrement en cours…");
+    return;
+  }
+  button.disabled = true;
+  setRefreshStatus("Actualisation…");
+  try {
+    const remote = await fetchRemoteData();
+    if (remote) {
+      state = remote;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      renderChart();
+      renderTeams();
+    }
+    setRefreshStatus(`À jour — ${new Date().toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`);
+  } catch (error) {
+    setRefreshStatus("⚠ Échec de l'actualisation");
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function setRefreshStatus(text) {
+  document.getElementById("refresh-status").textContent = text;
 }
 
 const SAVE_MESSAGES = {
@@ -728,6 +762,7 @@ async function bootstrap() {
   setupNavigation();
   setupAuth();
   setupAdmin();
+  document.getElementById("refresh-button").addEventListener("click", manualRefresh);
   renderAdmin();
 
   try {
