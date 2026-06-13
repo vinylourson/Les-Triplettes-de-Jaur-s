@@ -257,64 +257,64 @@
   },
   "bracket": {
     "seeds": [
-      "Cochonnet Crew",
-      "Les Pointilleux",
-      "La Triplette Verte",
-      "Tir de Précision",
-      "Les Rafleurs",
-      "Carreau Club",
-      "Bouchon d'Or",
-      "Les Inséparables",
-      "Pointeurs Solidaires",
       "Les Mènes",
+      "Bouchon d'Or",
       "Doublette Plus",
-      "Le Cercle Bleu"
+      "Les Rafleurs",
+      "Tir de Précision",
+      "Cochonnet Crew",
+      "Pointeurs Solidaires",
+      "Carreau Club",
+      "Les Pointilleux",
+      "Le Cercle Bleu",
+      "Les Inséparables",
+      "La Triplette Verte"
     ],
     "extra": "",
     "matches": {
       "e1": {
-        "teamA": "Cochonnet Crew",
-        "teamB": "Le Cercle Bleu",
+        "teamA": "Les Mènes",
+        "teamB": "La Triplette Verte",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 1
       },
       "e2": {
-        "teamA": "Les Pointilleux",
-        "teamB": "Doublette Plus",
+        "teamA": "Bouchon d'Or",
+        "teamB": "Les Inséparables",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 2
       },
       "e3": {
-        "teamA": "La Triplette Verte",
-        "teamB": "Les Mènes",
+        "teamA": "Doublette Plus",
+        "teamB": "Le Cercle Bleu",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 3
       },
       "e4": {
-        "teamA": "Tir de Précision",
-        "teamB": "Pointeurs Solidaires",
+        "teamA": "Les Rafleurs",
+        "teamB": "Les Pointilleux",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 4
       },
       "e5": {
-        "teamA": "Les Rafleurs",
-        "teamB": "Les Inséparables",
+        "teamA": "Tir de Précision",
+        "teamB": "Carreau Club",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 5
       },
       "e6": {
-        "teamA": "Carreau Club",
-        "teamB": "Bouchon d'Or",
+        "teamA": "Cochonnet Crew",
+        "teamB": "Pointeurs Solidaires",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
