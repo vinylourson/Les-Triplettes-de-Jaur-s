@@ -333,7 +333,7 @@
         "teamB": "Les Pointilleux",
         "scoreA": 13,
         "scoreB": 4,
-        "winner": "",
+        "winner": "Le Cercle Bleu",
         "field": 2
       },
       "q3": {
@@ -346,7 +346,7 @@
       },
       "s1": {
         "teamA": "Bouchon d'Or",
-        "teamB": "À déterminer",
+        "teamB": "Le Cercle Bleu",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
