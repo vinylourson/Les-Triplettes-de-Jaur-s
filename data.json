@@ -293,7 +293,7 @@
         "teamB": "Le Cercle Bleu",
         "scoreA": 9,
         "scoreB": 13,
-        "winner": "",
+        "winner": "Le Cercle Bleu",
         "field": 3
       },
       "e4": {
@@ -329,7 +329,7 @@
         "field": 1
       },
       "q2": {
-        "teamA": "À déterminer",
+        "teamA": "Le Cercle Bleu",
         "teamB": "À déterminer",
         "scoreA": 0,
         "scoreB": 0,
