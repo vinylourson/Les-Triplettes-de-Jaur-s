@@ -317,7 +317,7 @@
         "teamB": "Pointeurs Solidaires",
         "scoreA": 12,
         "scoreB": 14,
-        "winner": "",
+        "winner": "Pointeurs Solidaires",
         "field": 6
       },
       "q1": {
@@ -338,7 +338,7 @@
       },
       "q3": {
         "teamA": "Tir de Précision",
-        "teamB": "À déterminer",
+        "teamB": "Pointeurs Solidaires",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
