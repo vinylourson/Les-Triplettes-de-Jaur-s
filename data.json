@@ -301,7 +301,7 @@
         "teamB": "Les Pointilleux",
         "scoreA": 4,
         "scoreB": 13,
-        "winner": "",
+        "winner": "Les Pointilleux",
         "field": 4
       },
       "e5": {
@@ -330,7 +330,7 @@
       },
       "q2": {
         "teamA": "Le Cercle Bleu",
-        "teamB": "À déterminer",
+        "teamB": "Les Pointilleux",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
