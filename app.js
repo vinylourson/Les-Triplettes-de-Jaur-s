@@ -475,7 +475,7 @@ function renderWarmupRounds() {
     .map(
       (round) =>
         `<section class="warmup-round"><h3>${round.label}</h3><div class="match-grid">${round.matches
-          .map(matchCard)
+          .map((m) => matchCard(m))
           .join("")}</div></section>`
     )
     .join("");
@@ -524,15 +524,17 @@ function renderBracket() {
 
 function matchCard(match, id) {
   const result = id ? (match.winner ? (match.winner === match.teamA ? "A" : "B") : null) : warmupResult(match);
-  const aWin = result === "A";
-  const bWin = result === "B";
-  const draw = result === "draw";
+  const sideClass = (side) => {
+    if (result === "draw") return "draw";
+    if (!result) return "";
+    return result === side ? "winner" : "loser";
+  };
   const challenger = id === "s2" ? `<span class="challenger-tag">défi</span>` : "";
   return `<article class="match-card">
     <div class="match-field">Terrain ${match.field}${challenger}</div>
-    <div class="${aWin ? "winner" : ""}">${match.teamA} : ${match.scoreA}</div>
-    <div class="${bWin ? "winner" : ""}">${match.teamB} : ${match.scoreB}</div>
-    ${draw ? `<div class="draw-note">Match nul</div>` : ""}
+    <div class="${sideClass("A")}">${match.teamA} : ${match.scoreA}</div>
+    <div class="${sideClass("B")}">${match.teamB} : ${match.scoreB}</div>
+    ${result === "draw" ? `<div class="draw-note">Match nul</div>` : ""}
   </article>`;
 }
 

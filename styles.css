@@ -16,6 +16,8 @@
   --pink: #f3a8c9; /* dégradé : rose */
   --connector: #7a72c9;
   --winner: #047857;
+  --loser: #b91c1c;
+  --draw: #b45309; /* ambre : nul, distinct du vert/rouge, contraste AA */
   --danger: #b91c1c;
 }
 
@@ -224,10 +226,21 @@ summary:focus-visible {
   font-size: 0.65rem;
 }
 
+/* Résultats sur les cartes : vainqueur vert, perdant rouge, nul ambre */
+.match-card .loser {
+  color: var(--loser);
+  font-weight: 600;
+}
+
+.match-card .draw {
+  color: var(--draw);
+  font-weight: 700;
+}
+
 .draw-note {
   font-size: 0.75rem;
-  font-style: italic;
-  color: #5d5668;
+  font-weight: 700;
+  color: var(--draw);
   margin-top: 0.2rem;
 }
 
