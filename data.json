@@ -325,7 +325,7 @@
         "teamB": "Bouchon d'Or",
         "scoreA": 8,
         "scoreB": 13,
-        "winner": "",
+        "winner": "Bouchon d'Or",
         "field": 1
       },
       "q2": {
@@ -345,7 +345,7 @@
         "field": 3
       },
       "s1": {
-        "teamA": "À déterminer",
+        "teamA": "Bouchon d'Or",
         "teamB": "À déterminer",
         "scoreA": 0,
         "scoreB": 0,
