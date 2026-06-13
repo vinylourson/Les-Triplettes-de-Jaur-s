@@ -8,13 +8,25 @@
     <link rel="icon" type="image/x-icon" href="./favicon.ico" sizes="16x16 32x32 48x48" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Caveat:wght@700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <header>
-      <h1>Les Triplettes de Jaurès</h1>
-      <p class="tagline">La journée pétanque, mais pas que !</p>
+      <div class="header-top">
+        <div class="header-title">
+          <h1>Les Triplettes de Jaurès</h1>
+          <p class="tagline">La journée pétanque, mais pas que !</p>
+        </div>
+        <div class="qr-promo">
+          <p class="qr-text">Scannez-moi&nbsp;!</p>
+          <svg class="qr-arrow" viewBox="0 0 90 70" aria-hidden="true" focusable="false">
+            <path d="M6 12 C 34 4, 60 8, 74 44" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" />
+            <path d="M74 44 L 60 38 M74 44 L 79 29" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <img class="qr-code" src="./qr-code.png" width="110" height="110" alt="QR code — scannez pour ouvrir le site du tournoi" />
+        </div>
+      </div>
       <div class="header-bar">
         <nav>
           <button class="nav-button active" data-view="finals">Phase finale</button>

@@ -35,12 +35,66 @@ header {
   padding: 1.5rem 1rem 1.25rem;
 }
 
+.header-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 2rem;
+}
+
 h1 {
   font-family: "Abril Fatface", Georgia, serif;
   font-weight: 400;
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.1;
   margin: 0;
+}
+
+/* Encart QR : « Scannez-moi ! » manuscrit + flèche dessinée → QR code */
+.qr-promo {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--ink);
+}
+
+.qr-text {
+  font-family: "Caveat", cursive;
+  font-weight: 700;
+  font-size: 1.7rem;
+  line-height: 1;
+  margin: 0;
+  transform: rotate(-6deg);
+}
+
+.qr-arrow {
+  width: 4.5rem;
+  height: 3.5rem;
+  flex: 0 0 auto;
+  margin-bottom: 0.75rem;
+}
+
+.qr-code {
+  width: 6.25rem;
+  height: 6.25rem;
+  border-radius: 0.6rem;
+  background: #fff;
+  padding: 0.3rem;
+  box-shadow: 0 2px 8px rgba(28, 23, 38, 0.25);
+}
+
+@media (max-width: 540px) {
+  .qr-text {
+    font-size: 1.4rem;
+  }
+  .qr-arrow {
+    width: 3.25rem;
+  }
+  .qr-code {
+    width: 5rem;
+    height: 5rem;
+  }
 }
 
 .tagline {
