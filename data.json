@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "teams": [
     {
       "name": "Cochonnet Crew",
@@ -85,247 +86,289 @@
         "Yann",
         "Zoé"
       ]
-    },
-    {
-      "name": "Les Fanny",
-      "members": [
-        "Arthur",
-        "Binta"
-      ]
-    },
-    {
-      "name": "La Boule Noire",
-      "members": [
-        "Cyril",
-        "Diane"
-      ]
-    },
-    {
-      "name": "Petanq'Attack",
-      "members": [
-        "Eli",
-        "Fiona"
-      ]
-    },
-    {
-      "name": "Les Finalistes",
-      "members": [
-        "Gaël",
-        "Hana"
-      ]
     }
   ],
-  "warmup": [
-    {
-      "id": "warmup-1",
-      "teamA": "Les Rafleurs",
-      "teamB": "Les Fanny",
-      "scoreA": 3,
-      "scoreB": 5,
-      "winner": "Les Fanny"
-    },
-    {
-      "id": "warmup-2",
-      "teamA": "Les Finalistes",
-      "teamB": "Doublette Plus",
-      "scoreA": 5,
-      "scoreB": 7,
-      "winner": "Les Finalistes"
-    },
-    {
-      "id": "warmup-3",
-      "teamA": "Petanq'Attack",
-      "teamB": "La Boule Noire",
-      "scoreA": 0,
-      "scoreB": 0,
-      "winner": ""
-    },
-    {
-      "id": "warmup-4",
-      "teamA": "Les Mènes",
-      "teamB": "Pointeurs Solidaires",
-      "scoreA": 0,
-      "scoreB": 0,
-      "winner": ""
-    },
-    {
-      "id": "warmup-5",
-      "teamA": "Carreau Club",
-      "teamB": "La Triplette Verte",
-      "scoreA": 0,
-      "scoreB": 0,
-      "winner": ""
-    },
-    {
-      "id": "warmup-6",
-      "teamA": "Bouchon d'Or",
-      "teamB": "Les Pointilleux",
-      "scoreA": 0,
-      "scoreB": 0,
-      "winner": ""
-    },
-    {
-      "id": "warmup-7",
-      "teamA": "Cochonnet Crew",
-      "teamB": "Le Cercle Bleu",
-      "scoreA": 0,
-      "scoreB": 0,
-      "winner": ""
-    },
-    {
-      "id": "warmup-8",
-      "teamA": "Tir de Précision",
-      "teamB": "Les Inséparables",
-      "scoreA": 0,
-      "scoreB": 0,
-      "winner": ""
+  "warmup": {
+    "rounds": [
+      {
+        "id": "wu-1",
+        "label": "Match 1",
+        "matches": [
+          {
+            "id": "wu1-1",
+            "teamA": "Cochonnet Crew",
+            "teamB": "Le Cercle Bleu",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 1
+          },
+          {
+            "id": "wu1-2",
+            "teamA": "Les Pointilleux",
+            "teamB": "Doublette Plus",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 2
+          },
+          {
+            "id": "wu1-3",
+            "teamA": "La Triplette Verte",
+            "teamB": "Les Mènes",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 3
+          },
+          {
+            "id": "wu1-4",
+            "teamA": "Tir de Précision",
+            "teamB": "Pointeurs Solidaires",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 4
+          },
+          {
+            "id": "wu1-5",
+            "teamA": "Les Rafleurs",
+            "teamB": "Les Inséparables",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 5
+          },
+          {
+            "id": "wu1-6",
+            "teamA": "Carreau Club",
+            "teamB": "Bouchon d'Or",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 6
+          }
+        ]
+      },
+      {
+        "id": "wu-2",
+        "label": "Match 2",
+        "matches": [
+          {
+            "id": "wu2-1",
+            "teamA": "Cochonnet Crew",
+            "teamB": "Les Pointilleux",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 1
+          },
+          {
+            "id": "wu2-2",
+            "teamA": "La Triplette Verte",
+            "teamB": "Tir de Précision",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 2
+          },
+          {
+            "id": "wu2-3",
+            "teamA": "Les Rafleurs",
+            "teamB": "Carreau Club",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 3
+          },
+          {
+            "id": "wu2-4",
+            "teamA": "Bouchon d'Or",
+            "teamB": "Les Inséparables",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 4
+          },
+          {
+            "id": "wu2-5",
+            "teamA": "Pointeurs Solidaires",
+            "teamB": "Les Mènes",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 5
+          },
+          {
+            "id": "wu2-6",
+            "teamA": "Doublette Plus",
+            "teamB": "Le Cercle Bleu",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 6
+          }
+        ]
+      },
+      {
+        "id": "wu-3",
+        "label": "Match 3",
+        "matches": [
+          {
+            "id": "wu3-1",
+            "teamA": "Cochonnet Crew",
+            "teamB": "Bouchon d'Or",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 1
+          },
+          {
+            "id": "wu3-2",
+            "teamA": "Les Pointilleux",
+            "teamB": "Les Inséparables",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 2
+          },
+          {
+            "id": "wu3-3",
+            "teamA": "La Triplette Verte",
+            "teamB": "Pointeurs Solidaires",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 3
+          },
+          {
+            "id": "wu3-4",
+            "teamA": "Tir de Précision",
+            "teamB": "Les Mènes",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 4
+          },
+          {
+            "id": "wu3-5",
+            "teamA": "Les Rafleurs",
+            "teamB": "Doublette Plus",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 5
+          },
+          {
+            "id": "wu3-6",
+            "teamA": "Carreau Club",
+            "teamB": "Le Cercle Bleu",
+            "scoreA": 0,
+            "scoreB": 0,
+            "field": 6
+          }
+        ]
+      }
+    ],
+    "generatedCount": 12
+  },
+  "bracket": {
+    "seeds": [
+      "Cochonnet Crew",
+      "Les Pointilleux",
+      "La Triplette Verte",
+      "Tir de Précision",
+      "Les Rafleurs",
+      "Carreau Club",
+      "Bouchon d'Or",
+      "Les Inséparables",
+      "Pointeurs Solidaires",
+      "Les Mènes",
+      "Doublette Plus",
+      "Le Cercle Bleu"
+    ],
+    "extra": "",
+    "matches": {
+      "e1": {
+        "teamA": "Cochonnet Crew",
+        "teamB": "Le Cercle Bleu",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 1
+      },
+      "e2": {
+        "teamA": "Les Pointilleux",
+        "teamB": "Doublette Plus",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 2
+      },
+      "e3": {
+        "teamA": "La Triplette Verte",
+        "teamB": "Les Mènes",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 3
+      },
+      "e4": {
+        "teamA": "Tir de Précision",
+        "teamB": "Pointeurs Solidaires",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 4
+      },
+      "e5": {
+        "teamA": "Les Rafleurs",
+        "teamB": "Les Inséparables",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 5
+      },
+      "e6": {
+        "teamA": "Carreau Club",
+        "teamB": "Bouchon d'Or",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 6
+      },
+      "q1": {
+        "teamA": "À déterminer",
+        "teamB": "À déterminer",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 1
+      },
+      "q2": {
+        "teamA": "À déterminer",
+        "teamB": "À déterminer",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 2
+      },
+      "q3": {
+        "teamA": "À déterminer",
+        "teamB": "À déterminer",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 3
+      },
+      "s1": {
+        "teamA": "À déterminer",
+        "teamB": "À déterminer",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 1
+      },
+      "s2": {
+        "teamA": "À déterminer",
+        "teamB": "À déterminer",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 2
+      },
+      "final": {
+        "teamA": "À déterminer",
+        "teamB": "À déterminer",
+        "scoreA": 0,
+        "scoreB": 0,
+        "winner": "",
+        "field": 1
+      }
     }
-  ],
-  "rounds": [
-    {
-      "id": "round-16",
-      "label": "1/8 de finale",
-      "matches": [
-        {
-          "id": "r16-1",
-          "teamA": "Les Pointilleux",
-          "teamB": "Carreau Club",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r16-2",
-          "teamA": "Les Fanny",
-          "teamB": "La Boule Noire",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r16-3",
-          "teamA": "Pointeurs Solidaires",
-          "teamB": "Les Inséparables",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r16-4",
-          "teamA": "Petanq'Attack",
-          "teamB": "Cochonnet Crew",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r16-5",
-          "teamA": "Les Rafleurs",
-          "teamB": "Le Cercle Bleu",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r16-6",
-          "teamA": "Les Finalistes",
-          "teamB": "Doublette Plus",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r16-7",
-          "teamA": "Tir de Précision",
-          "teamB": "Les Mènes",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r16-8",
-          "teamA": "Bouchon d'Or",
-          "teamB": "La Triplette Verte",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        }
-      ]
-    },
-    {
-      "id": "round-8",
-      "label": "1/4 de finale",
-      "matches": [
-        {
-          "id": "r8-1",
-          "teamA": "À déterminer",
-          "teamB": "À déterminer",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r8-2",
-          "teamA": "À déterminer",
-          "teamB": "À déterminer",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r8-3",
-          "teamA": "À déterminer",
-          "teamB": "À déterminer",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r8-4",
-          "teamA": "À déterminer",
-          "teamB": "À déterminer",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        }
-      ]
-    },
-    {
-      "id": "round-4",
-      "label": "1/2 finale",
-      "matches": [
-        {
-          "id": "r4-1",
-          "teamA": "À déterminer",
-          "teamB": "À déterminer",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        },
-        {
-          "id": "r4-2",
-          "teamA": "À déterminer",
-          "teamB": "À déterminer",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        }
-      ]
-    },
-    {
-      "id": "round-2",
-      "label": "Finale",
-      "matches": [
-        {
-          "id": "r2-1",
-          "teamA": "À déterminer",
-          "teamB": "À déterminer",
-          "scoreA": 0,
-          "scoreB": 0,
-          "winner": ""
-        }
-      ]
-    }
-  ],
-  "drawCount": 16
+  },
+  "seededCount": 12
 }

@@ -15,24 +15,35 @@
     <header>
       <h1>Les Triplettes de Jaurès</h1>
       <p class="tagline">La journée pétanque, mais pas que !</p>
-      <nav>
-        <button class="nav-button active" data-view="chart">Tableau</button>
-        <button class="nav-button" data-view="teams">Équipes</button>
-        <button class="nav-button" data-view="admin">Back-office</button>
-      </nav>
+      <div class="header-bar">
+        <nav>
+          <button class="nav-button active" data-view="finals">Phase finale</button>
+          <button class="nav-button" data-view="warmup">Tour de chauffe</button>
+          <button class="nav-button" data-view="teams">Équipes</button>
+          <button class="nav-button" data-view="admin">Back-office</button>
+        </nav>
+        <div class="refresh-bar">
+          <span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span>
+          <button id="refresh-button" class="button-secondary" type="button">Actualiser les scores</button>
+        </div>
+      </div>
     </header>
 
     <main>
-      <section id="chart-view" class="view">
-        <div class="chart-toolbar">
-          <button id="refresh-button" class="button-secondary" type="button">Actualiser les scores</button>
-          <span id="refresh-status" class="refresh-status" role="status" aria-live="polite"></span>
-        </div>
-        <h2>Tour de chauffe</h2>
-        <div id="warmup-list" class="match-grid"></div>
-
-        <h2>Tableau final</h2>
+      <section id="finals-view" class="view">
+        <h2>Phase finale</h2>
+        <p class="view-intro">Match à élimination — têtes de série issues du classement du tour de chauffe.</p>
         <div id="bracket-container"></div>
+      </section>
+
+      <section id="warmup-view" class="view hidden">
+        <h2>Tour de chauffe</h2>
+        <p class="view-intro">3 parties de 20 min. Victoire = 2 pts, match nul = 1 pt, défaite = 0.</p>
+        <div id="warmup-rounds"></div>
+
+        <h2>Classement</h2>
+        <p class="view-intro">En cas d'égalité de points, départage au goal-average (points marqués − points encaissés).</p>
+        <div id="standings"></div>
       </section>
 
       <section id="teams-view" class="view hidden">
@@ -57,21 +68,32 @@
             <button id="logout-button" class="button-secondary">Se déconnecter</button>
           </div>
           <p class="admin-hint">Saisie au clavier : Tab pour passer d'un champ à l'autre — chaque modification est enregistrée automatiquement.</p>
+
           <details class="admin-section" open>
-            <summary>Gérer les équipes</summary>
+            <summary>1. Gérer les équipes (A → L)</summary>
             <div class="admin-section-body">
               <div id="admin-teams" class="team-table"></div>
-              <button id="rebuild-schedule-button" class="button-secondary">Tirage au sort des matchs</button>
             </div>
           </details>
+
           <details class="admin-section">
-            <summary>Tour de chauffe</summary>
+            <summary>2. Tour de chauffe</summary>
             <div class="admin-section-body">
+              <button id="generate-warmup-button" class="button-secondary">Générer le tour de chauffe</button>
               <div id="admin-warmup"></div>
             </div>
           </details>
+
           <details class="admin-section">
-            <summary>Tableau final</summary>
+            <summary>3. Classement</summary>
+            <div class="admin-section-body">
+              <div id="admin-standings"></div>
+              <button id="launch-finals-button" class="button-secondary">Lancer la phase finale (selon le classement)</button>
+            </div>
+          </details>
+
+          <details class="admin-section">
+            <summary>4. Phase finale</summary>
             <div class="admin-section-body">
               <div id="admin-bracket"></div>
             </div>

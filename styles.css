@@ -66,7 +66,31 @@ nav {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.header-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
   margin-top: 1rem;
+}
+
+.refresh-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.view-intro {
+  color: #5d5668;
+  margin: 0 0 1rem;
+}
+
+.empty-note {
+  color: #5d5668;
+  font-style: italic;
 }
 
 main {
@@ -168,38 +192,43 @@ summary:focus-visible {
 .bracket {
   --bracket-gap: 2rem;
   display: grid;
-  /* grid-template-columns posé en inline par renderBracket() selon le nombre de tours */
+  grid-template-columns: repeat(7, minmax(150px, 1fr));
   column-gap: var(--bracket-gap);
   overflow-x: auto;
   padding-bottom: 0.5rem;
 }
 
-.chart-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
 .refresh-status {
-  font-weight: 600;
-  color: #5d5668;
+  font-weight: 700;
+  color: var(--ink);
 }
 
-.bye {
+/* Terrain et résultats sur les cartes de match */
+.match-field {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: #5d5668;
-  font-style: italic;
-}
-
-.bye-card {
+  margin-bottom: 0.3rem;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-style: dashed;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
-.bye-card p {
-  margin: 0.15rem 0;
+.challenger-tag {
+  background: var(--marigold);
+  color: var(--ink);
+  border-radius: 999px;
+  padding: 0.05rem 0.5rem;
+  font-size: 0.65rem;
+}
+
+.draw-note {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: #5d5668;
+  margin-top: 0.2rem;
 }
 
 .bracket-column {
@@ -302,6 +331,65 @@ summary:focus-visible {
   color: var(--winner);
 }
 
+/* ---------- Tour de chauffe & classement ---------- */
+
+.warmup-round {
+  margin-bottom: 1.5rem;
+}
+
+.warmup-round h3 {
+  margin: 0 0 0.6rem;
+}
+
+.standings-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(28, 23, 38, 0.12);
+  font-size: 1.05rem;
+}
+
+.standings-table th,
+.standings-table td {
+  padding: 0.55rem 0.7rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+.standings-table th {
+  background: var(--ink);
+  color: #fff;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.standings-table .team {
+  text-align: left;
+  font-weight: 700;
+}
+
+.standings-table .rank {
+  font-weight: 800;
+  color: var(--indigo-dark);
+}
+
+.standings-table .pts {
+  font-weight: 800;
+}
+
+.standings-table tbody tr:nth-child(odd) {
+  background: var(--card-tint);
+}
+
+/* Les 8 premiers se qualifient — repère visuel */
+.standings-table tbody tr:nth-child(-n + 8) .rank::after {
+  content: " ✓";
+  color: var(--winner);
+}
+
 /* ---------- Équipes (affichée sur écran pendant le tournoi : lisible de loin) ---------- */
 
 .teams-grid {
@@ -335,6 +423,23 @@ summary:focus-visible {
   font-weight: 800;
   line-height: 1.15;
   margin: 0 0 0.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.team-letter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  flex: 0 0 auto;
+  background: var(--ink);
+  color: #fff;
+  border-radius: 0.4rem;
+  font-family: "Abril Fatface", Georgia, serif;
+  font-size: 1.1rem;
 }
 
 .team-card ul {
@@ -539,4 +644,38 @@ button:disabled {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem;
+}
+
+.field-label {
+  font-size: 0.78rem;
+}
+
+.match-result {
+  margin: 0.5rem 0 0;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--indigo-dark);
+}
+
+.challenger-card {
+  border-color: var(--marigold);
+  background: #fef3df;
+}
+
+.suggest-extra {
+  width: 100%;
+  margin: 0.25rem 0 0.5rem;
+  background: #fff;
+  color: var(--indigo-dark);
+  box-shadow: inset 0 0 0 2px var(--indigo);
+  font-size: 0.8rem;
+}
+
+.suggest-extra:hover {
+  background: #eef0ff;
+}
+
+#admin-standings {
+  margin-bottom: 0.75rem;
+  overflow-x: auto;
 }

@@ -1,29 +1,44 @@
 # Les Triplettes de Jaurès
 
 Site web statique (hébergé sur GitHub Pages) pour afficher et gérer un tournoi de
-pétanque. Aucune dépendance, aucun serveur applicatif : trois fichiers
-(`index.html`, `styles.css`, `app.js`) et un fichier de données (`data.json`)
-versionné dans le dépôt.
+pétanque **à 12 équipes** (24 à 36 joueurs, doublettes ou triplettes). Aucune
+dépendance, aucun serveur applicatif : trois fichiers (`index.html`,
+`styles.css`, `app.js`) et un fichier de données (`data.json`) versionné dans le
+dépôt.
 
 Site en ligne : <https://vinylourson.github.io/Les-Triplettes-de-Jaur-s/>
 
+## Format du tournoi (v1.0)
+
+**12 équipes A → L** (l'ordre de la liste fixe les lettres).
+
+1. **Tour de chauffe — 3 parties de 20 min.** Appariements fixes selon la
+   position des équipes :
+   - Match 1 : A‑L, B‑K, C‑J, D‑I, E‑H, F‑G
+   - Match 2 : A‑B, C‑D, E‑F, G‑H, I‑J, K‑L
+   - Match 3 : A‑G, B‑H, C‑I, D‑J, E‑K, F‑L
+2. **Classement.** Victoire = 2 pts, match nul = 1 pt, défaite = 0. Égalité
+   départagée au **goal-average** (points marqués − points encaissés). Les
+   équipes sont classées de la 1re (plus de points) à la 12e.
+3. **Phase finale à élimination**, têtes de série issues du classement :
+   1er‑12e, 2e‑11e, 3e‑10e, 4e‑9e, 5e‑8e, 6e‑7e en 1/8. Le côté droit étant plus
+   court, la **demi-finale droite accueille un défi ajouté** : vainqueur du
+   tournoi ado, ou meilleur perdant des 1/4 (au goal-average, proposé
+   automatiquement). Le vainqueur d'un match avance automatiquement au tour
+   suivant.
+
 ## Fonctionnalités
 
-- **Tour de chauffe** et **tableau final** à élimination directe, affichés sous
-  forme de tableau symétrique avec lignes de connexion.
-- **Nombre d'équipes adaptable** (de 2 à 16) : la taille du tableau est la
-  puissance de 2 immédiatement supérieure au nombre d'équipes. Les places
-  vacantes deviennent des **exemptions** (« Exempt »), réparties au plus une par
-  match, qui qualifient leur adversaire d'office.
-- **Tirage au sort aléatoire** des matchs (tour de chauffe et tableau final) à
-  partir de la liste des équipes.
-- **Avancement automatique** : le vainqueur d'un match est reporté dans le tour
-  suivant ; corriger un résultat invalide les tours en aval.
-- Page dédiée aux **équipes et joueurs**, lisible de loin (pensée pour un
-  affichage sur écran pendant le tournoi).
-- **Back-office** pour gérer les équipes (édition en ligne au clavier) et saisir
-  les scores ; chaque modification est **enregistrée automatiquement**.
-- **Bouton « Actualiser les scores »** sur la page Tableau, et rafraîchissement
+- Vues publiques **Phase finale** (tableau en éventail avec lignes de connexion),
+  **Tour de chauffe** (3 matchs + classement) et **Équipes** (badges A → L,
+  lisibles de loin pour l'écran du tournoi).
+- **Numéro de terrain** (1 à 8) sur chaque match, attribué automatiquement et
+  modifiable.
+- **Back-office** : édition des équipes en ligne au clavier, génération du tour
+  de chauffe, classement calculé en direct, lancement de la phase finale depuis
+  le classement, saisie des scores avec avancement automatique. Chaque
+  modification est **enregistrée automatiquement** (commit GitHub).
+- **Bouton « Actualiser les scores »** dans l'en-tête, et rafraîchissement
   automatique toutes les 60 s pour les spectateurs.
 - Accessibilité : contrastes AA, focus clavier visible, libellés ARIA,
   `prefers-reduced-motion`.
@@ -84,18 +99,29 @@ le dépôt avant d'ouvrir le back-office.
 
 ## Déroulé d'un tournoi
 
-1. **Tirage des équipes au sort** (petits papiers), puis saisie des noms et des
-   joueurs dans le back-office.
-2. Cliquer sur **« Tirage au sort des matchs »** pour générer aléatoirement le
-   tour de chauffe et le tableau final (s'adapte au nombre d'équipes).
-3. Pendant les parties, saisir les scores : les vainqueurs avancent
-   automatiquement, chaque modification est enregistrée (commit).
-4. Afficher la page **Tableau** sur l'écran ; elle se rafraîchit toute seule, et
-   le bouton **« Actualiser les scores »** force une mise à jour immédiate.
+Le back-office est organisé en 4 étapes numérotées :
 
-> Refaire un tirage réinitialise tous les scores (une confirmation est demandée).
-> Si une équipe se désiste, la supprimer puis relancer le tirage **avant** de
-> saisir des résultats.
+1. **Gérer les équipes.** Saisir les 12 équipes (A → L) et leurs joueurs. Tirage
+   des équipes au sort (petits papiers) puis saisie au clavier (édition en
+   ligne, enregistrement automatique).
+2. **Tour de chauffe.** Cliquer sur **« Générer le tour de chauffe »** (3 matchs),
+   puis saisir les scores des 18 parties. Le résultat (victoire / nul) est déduit
+   des scores.
+3. **Classement.** Calculé en direct à partir des scores. Une fois le tour de
+   chauffe terminé, cliquer sur **« Lancer la phase finale (selon le classement) »**
+   pour renseigner les têtes de série du tableau.
+4. **Phase finale.** Saisir les scores et le vainqueur de chaque match ; les
+   équipes avancent automatiquement. Renseigner le **défi** de la demi-finale
+   droite (saisie libre ou suggestion « meilleur perdant »).
+
+Afficher les pages **Phase finale** et **Tour de chauffe** sur l'écran du
+tournoi : elles se rafraîchissent toutes seules, et le bouton **« Actualiser les
+scores »** force une mise à jour immédiate.
+
+> Régénérer le tour de chauffe ou relancer la phase finale réinitialise les
+> scores concernés (une confirmation est demandée). Le format requiert
+> **exactement 12 équipes** : la génération est bloquée tant que ce n'est pas le
+> cas.
 
 ## Lancer localement
 
