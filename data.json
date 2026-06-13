@@ -270,7 +270,7 @@
       "Les Inséparables",
       "La Triplette Verte"
     ],
-    "extra": "",
+    "extra": "Vainqueurs tournoi ados",
     "matches": {
       "e1": {
         "teamA": "Les Mènes",
@@ -354,7 +354,7 @@
       },
       "s2": {
         "teamA": "Pointeurs Solidaires",
-        "teamB": "À déterminer",
+        "teamB": "Vainqueurs tournoi ados",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
