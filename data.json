@@ -73,7 +73,7 @@
       ]
     },
     {
-      "name": "J",
+      "name": "J -Inch'allah",
       "members": [
         "Nico F",
         "Laurie",
@@ -122,7 +122,7 @@
           {
             "id": "wu1-3",
             "teamA": "C",
-            "teamB": "J",
+            "teamB": "J -Inch'allah",
             "scoreA": 5,
             "scoreB": 9,
             "field": 3
@@ -192,7 +192,7 @@
           {
             "id": "wu2-5",
             "teamA": "I",
-            "teamB": "J",
+            "teamB": "J -Inch'allah",
             "scoreA": 0,
             "scoreB": 0,
             "field": 5
@@ -238,7 +238,7 @@
           {
             "id": "wu3-4",
             "teamA": "D - Les demis-dieux",
-            "teamB": "J",
+            "teamB": "J -Inch'allah",
             "scoreA": 0,
             "scoreB": 0,
             "field": 4
@@ -275,7 +275,7 @@
       "G",
       "H - La Triforce",
       "I",
-      "J",
+      "J -Inch'allah",
       "K",
       "L - Les foudres de guerre"
     ],
@@ -299,7 +299,7 @@
       },
       "e3": {
         "teamA": "C",
-        "teamB": "J",
+        "teamB": "J -Inch'allah",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
