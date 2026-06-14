@@ -106,50 +106,50 @@
         "matches": [
           {
             "id": "wu1-1",
-            "teamA": "Cochonnet Crew",
-            "teamB": "J",
-            "scoreA": 9,
-            "scoreB": 3,
+            "teamA": "A",
+            "teamB": "L",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 1
           },
           {
             "id": "wu1-2",
-            "teamA": "Les Pointilleux",
-            "teamB": "I",
-            "scoreA": 4,
-            "scoreB": 8,
+            "teamA": "B",
+            "teamB": "K",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 2
           },
           {
             "id": "wu1-3",
-            "teamA": "A",
-            "teamB": "H",
-            "scoreA": 2,
-            "scoreB": 5,
+            "teamA": "C",
+            "teamB": "J",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 3
           },
           {
             "id": "wu1-4",
-            "teamA": "B",
-            "teamB": "G",
-            "scoreA": 4,
-            "scoreB": 4,
+            "teamA": "D",
+            "teamB": "I",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 4
           },
           {
             "id": "wu1-5",
-            "teamA": "C",
-            "teamB": "F",
-            "scoreA": 4,
-            "scoreB": 3,
+            "teamA": "E",
+            "teamB": "H",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 5
           },
           {
             "id": "wu1-6",
-            "teamA": "D",
-            "teamB": "E",
-            "scoreA": 3,
-            "scoreB": 4,
+            "teamA": "F",
+            "teamB": "G",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 6
           }
         ]
@@ -160,50 +160,50 @@
         "matches": [
           {
             "id": "wu2-1",
-            "teamA": "Cochonnet Crew",
-            "teamB": "Les Pointilleux",
-            "scoreA": 5,
-            "scoreB": 5,
+            "teamA": "A",
+            "teamB": "B",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 1
           },
           {
             "id": "wu2-2",
-            "teamA": "A",
-            "teamB": "B",
-            "scoreA": 2,
-            "scoreB": 8,
+            "teamA": "C",
+            "teamB": "D",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 2
           },
           {
             "id": "wu2-3",
-            "teamA": "C",
-            "teamB": "D",
-            "scoreA": 3,
-            "scoreB": 7,
+            "teamA": "E",
+            "teamB": "F",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 3
           },
           {
             "id": "wu2-4",
-            "teamA": "E",
-            "teamB": "F",
-            "scoreA": 7,
-            "scoreB": 3,
+            "teamA": "G",
+            "teamB": "H",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 4
           },
           {
             "id": "wu2-5",
-            "teamA": "G",
-            "teamB": "H",
-            "scoreA": 1,
-            "scoreB": 8,
+            "teamA": "I",
+            "teamB": "J",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 5
           },
           {
             "id": "wu2-6",
-            "teamA": "I",
-            "teamB": "J",
-            "scoreA": 13,
-            "scoreB": 4,
+            "teamA": "K",
+            "teamB": "L",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 6
           }
         ]
@@ -214,50 +214,50 @@
         "matches": [
           {
             "id": "wu3-1",
-            "teamA": "Cochonnet Crew",
-            "teamB": "E",
-            "scoreA": 4,
-            "scoreB": 8,
+            "teamA": "A",
+            "teamB": "G",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 1
           },
           {
             "id": "wu3-2",
-            "teamA": "Les Pointilleux",
-            "teamB": "F",
-            "scoreA": 3,
-            "scoreB": 3,
+            "teamA": "B",
+            "teamB": "H",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 2
           },
           {
             "id": "wu3-3",
-            "teamA": "A",
-            "teamB": "G",
-            "scoreA": 1,
-            "scoreB": 5,
+            "teamA": "C",
+            "teamB": "I",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 3
           },
           {
             "id": "wu3-4",
-            "teamA": "B",
-            "teamB": "H",
-            "scoreA": 6,
-            "scoreB": 7,
+            "teamA": "D",
+            "teamB": "J",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 4
           },
           {
             "id": "wu3-5",
-            "teamA": "C",
-            "teamB": "I",
-            "scoreA": 8,
-            "scoreB": 7,
+            "teamA": "E",
+            "teamB": "K",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 5
           },
           {
             "id": "wu3-6",
-            "teamA": "D",
-            "teamB": "J",
-            "scoreA": 8,
-            "scoreB": 9,
+            "teamA": "F",
+            "teamB": "L",
+            "scoreA": 0,
+            "scoreB": 0,
             "field": 6
           }
         ]
