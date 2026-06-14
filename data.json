@@ -58,10 +58,11 @@
       ]
     },
     {
-      "name": "Les Mènes",
+      "name": "H",
       "members": [
-        "Ugo",
-        "Violette"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     },
     {
@@ -104,7 +105,7 @@
           {
             "id": "wu1-3",
             "teamA": "A",
-            "teamB": "Les Mènes",
+            "teamB": "H",
             "scoreA": 2,
             "scoreB": 5,
             "field": 3
@@ -174,7 +175,7 @@
           {
             "id": "wu2-5",
             "teamA": "G",
-            "teamB": "Les Mènes",
+            "teamB": "H",
             "scoreA": 1,
             "scoreB": 8,
             "field": 5
@@ -220,7 +221,7 @@
           {
             "id": "wu3-4",
             "teamA": "B",
-            "teamB": "Les Mènes",
+            "teamB": "H",
             "scoreA": 6,
             "scoreB": 7,
             "field": 4
@@ -248,7 +249,7 @@
   },
   "bracket": {
     "seeds": [
-      "Les Mènes",
+      "H",
       "E",
       "Doublette Plus",
       "C",
@@ -264,11 +265,11 @@
     "extra": "Vainqueurs tournoi ados",
     "matches": {
       "e1": {
-        "teamA": "Les Mènes",
+        "teamA": "H",
         "teamB": "A",
         "scoreA": 13,
         "scoreB": 3,
-        "winner": "Les Mènes",
+        "winner": "H",
         "field": 1
       },
       "e2": {
@@ -312,7 +313,7 @@
         "field": 6
       },
       "q1": {
-        "teamA": "Les Mènes",
+        "teamA": "H",
         "teamB": "E",
         "scoreA": 8,
         "scoreB": 13,
