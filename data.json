@@ -44,14 +44,17 @@
     {
       "name": "F",
       "members": [
-        "G"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     },
     {
-      "name": "Pointeurs Solidaires",
+      "name": "G",
       "members": [
-        "Sam",
-        "Tina"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     },
     {
@@ -109,7 +112,7 @@
           {
             "id": "wu1-4",
             "teamA": "B",
-            "teamB": "Pointeurs Solidaires",
+            "teamB": "G",
             "scoreA": 4,
             "scoreB": 4,
             "field": 4
@@ -170,7 +173,7 @@
           },
           {
             "id": "wu2-5",
-            "teamA": "Pointeurs Solidaires",
+            "teamA": "G",
             "teamB": "Les Mènes",
             "scoreA": 1,
             "scoreB": 8,
@@ -209,7 +212,7 @@
           {
             "id": "wu3-3",
             "teamA": "A",
-            "teamB": "Pointeurs Solidaires",
+            "teamB": "G",
             "scoreA": 1,
             "scoreB": 5,
             "field": 3
@@ -251,7 +254,7 @@
       "C",
       "B",
       "Cochonnet Crew",
-      "Pointeurs Solidaires",
+      "G",
       "D",
       "Les Pointilleux",
       "Le Cercle Bleu",
@@ -302,10 +305,10 @@
       },
       "e6": {
         "teamA": "Cochonnet Crew",
-        "teamB": "Pointeurs Solidaires",
+        "teamB": "G",
         "scoreA": 12,
         "scoreB": 14,
-        "winner": "Pointeurs Solidaires",
+        "winner": "G",
         "field": 6
       },
       "q1": {
@@ -326,10 +329,10 @@
       },
       "q3": {
         "teamA": "B",
-        "teamB": "Pointeurs Solidaires",
+        "teamB": "G",
         "scoreA": 2,
         "scoreB": 13,
-        "winner": "Pointeurs Solidaires",
+        "winner": "G",
         "field": 3
       },
       "s1": {
@@ -341,7 +344,7 @@
         "field": 1
       },
       "s2": {
-        "teamA": "Pointeurs Solidaires",
+        "teamA": "G",
         "teamB": "Vainqueurs tournoi ados",
         "scoreA": 8,
         "scoreB": 13,
