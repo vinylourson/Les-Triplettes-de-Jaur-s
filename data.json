@@ -318,7 +318,7 @@
         "teamB": "A - Les tireurs de litres",
         "scoreA": 6,
         "scoreB": 10,
-        "winner": "",
+        "winner": "A - Les tireurs de litres",
         "field": 5
       },
       "e6": {
@@ -346,7 +346,7 @@
         "field": 2
       },
       "q3": {
-        "teamA": "À déterminer",
+        "teamA": "A - Les tireurs de litres",
         "teamB": "À déterminer",
         "scoreA": 0,
         "scoreB": 0,
