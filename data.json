@@ -65,7 +65,7 @@
       ]
     },
     {
-      "name": "I",
+      "name": "I - 'ls sont bons",
       "members": [
         "Jlo",
         "Katia",
@@ -130,7 +130,7 @@
           {
             "id": "wu1-4",
             "teamA": "D - Les demis-dieux",
-            "teamB": "I",
+            "teamB": "I - 'ls sont bons",
             "scoreA": 8,
             "scoreB": 4,
             "field": 4
@@ -191,7 +191,7 @@
           },
           {
             "id": "wu2-5",
-            "teamA": "I",
+            "teamA": "I - 'ls sont bons",
             "teamB": "J -Inch'allah",
             "scoreA": 4,
             "scoreB": 6,
@@ -230,7 +230,7 @@
           {
             "id": "wu3-3",
             "teamA": "C - Champions League",
-            "teamB": "I",
+            "teamB": "I - 'ls sont bons",
             "scoreA": 5,
             "scoreB": 5,
             "field": 3
@@ -274,7 +274,7 @@
       "J -Inch'allah",
       "F",
       "A - Les tireurs de litres",
-      "I",
+      "I - 'ls sont bons",
       "C - Champions League",
       "G - Les O.J.P",
       "K - Devine"
@@ -307,10 +307,10 @@
       },
       "e4": {
         "teamA": "H - La Triforce",
-        "teamB": "I",
+        "teamB": "I - 'ls sont bons",
         "scoreA": 9,
         "scoreB": 10,
-        "winner": "I",
+        "winner": "I - 'ls sont bons",
         "field": 4
       },
       "e5": {
@@ -339,10 +339,10 @@
       },
       "q2": {
         "teamA": "C - Champions League",
-        "teamB": "I",
+        "teamB": "I - 'ls sont bons",
         "scoreA": 3,
         "scoreB": 10,
-        "winner": "I",
+        "winner": "I - 'ls sont bons",
         "field": 2
       },
       "q3": {
@@ -355,7 +355,7 @@
       },
       "s1": {
         "teamA": "B - Hold up",
-        "teamB": "I",
+        "teamB": "I - 'ls sont bons",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
