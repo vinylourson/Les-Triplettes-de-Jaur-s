@@ -266,24 +266,24 @@
   },
   "bracket": {
     "seeds": [
-      "A - Les tireurs de litres",
-      "B - Hold up",
-      "C",
       "D - Les demis-dieux",
-      "E - Les Chaboudins",
-      "F",
-      "G - Les O.J.P",
+      "B - Hold up",
+      "L - Les foudres de guerre",
       "H - La Triforce",
-      "I",
+      "E - Les Chaboudins",
       "J -Inch'allah",
-      "K - Devine",
-      "L - Les foudres de guerre"
+      "F",
+      "A - Les tireurs de litres",
+      "I",
+      "C",
+      "G - Les O.J.P",
+      "K - Devine"
     ],
     "extra": "",
     "matches": {
       "e1": {
-        "teamA": "A - Les tireurs de litres",
-        "teamB": "L - Les foudres de guerre",
+        "teamA": "D - Les demis-dieux",
+        "teamB": "K - Devine",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
@@ -291,22 +291,22 @@
       },
       "e2": {
         "teamA": "B - Hold up",
-        "teamB": "K - Devine",
+        "teamB": "G - Les O.J.P",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 2
       },
       "e3": {
-        "teamA": "C",
-        "teamB": "J -Inch'allah",
+        "teamA": "L - Les foudres de guerre",
+        "teamB": "C",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 3
       },
       "e4": {
-        "teamA": "D - Les demis-dieux",
+        "teamA": "H - La Triforce",
         "teamB": "I",
         "scoreA": 0,
         "scoreB": 0,
@@ -315,15 +315,15 @@
       },
       "e5": {
         "teamA": "E - Les Chaboudins",
-        "teamB": "H - La Triforce",
+        "teamB": "A - Les tireurs de litres",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
         "field": 5
       },
       "e6": {
-        "teamA": "F",
-        "teamB": "G - Les O.J.P",
+        "teamA": "J -Inch'allah",
+        "teamB": "F",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
