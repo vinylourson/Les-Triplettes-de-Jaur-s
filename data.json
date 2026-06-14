@@ -66,7 +66,7 @@
       ]
     },
     {
-      "name": "Doublette Plus",
+      "name": "I",
       "members": [
         "Wassim",
         "Xena"
@@ -97,7 +97,7 @@
           {
             "id": "wu1-2",
             "teamA": "Les Pointilleux",
-            "teamB": "Doublette Plus",
+            "teamB": "I",
             "scoreA": 4,
             "scoreB": 8,
             "field": 2
@@ -182,7 +182,7 @@
           },
           {
             "id": "wu2-6",
-            "teamA": "Doublette Plus",
+            "teamA": "I",
             "teamB": "Le Cercle Bleu",
             "scoreA": 13,
             "scoreB": 4,
@@ -229,7 +229,7 @@
           {
             "id": "wu3-5",
             "teamA": "C",
-            "teamB": "Doublette Plus",
+            "teamB": "I",
             "scoreA": 8,
             "scoreB": 7,
             "field": 5
@@ -251,7 +251,7 @@
     "seeds": [
       "H",
       "E",
-      "Doublette Plus",
+      "I",
       "C",
       "B",
       "Cochonnet Crew",
@@ -281,7 +281,7 @@
         "field": 2
       },
       "e3": {
-        "teamA": "Doublette Plus",
+        "teamA": "I",
         "teamB": "Le Cercle Bleu",
         "scoreA": 9,
         "scoreB": 13,
