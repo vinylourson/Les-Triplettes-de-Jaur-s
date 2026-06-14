@@ -294,7 +294,7 @@
         "teamB": "G - Les O.J.P",
         "scoreA": 10,
         "scoreB": 5,
-        "winner": "",
+        "winner": "B - Hold up",
         "field": 2
       },
       "e3": {
@@ -331,7 +331,7 @@
       },
       "q1": {
         "teamA": "D - Les demis-dieux",
-        "teamB": "À déterminer",
+        "teamB": "B - Hold up",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
