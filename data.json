@@ -334,7 +334,7 @@
         "teamB": "B - Hold up",
         "scoreA": 8,
         "scoreB": 10,
-        "winner": "",
+        "winner": "B - Hold up",
         "field": 1
       },
       "q2": {
@@ -354,7 +354,7 @@
         "field": 3
       },
       "s1": {
-        "teamA": "À déterminer",
+        "teamA": "B - Hold up",
         "teamB": "À déterminer",
         "scoreA": 0,
         "scoreB": 0,
