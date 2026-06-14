@@ -57,7 +57,7 @@
       ]
     },
     {
-      "name": "H",
+      "name": "H - La Triforce",
       "members": [
         "Camille",
         "Matthieu Au",
@@ -138,7 +138,7 @@
           {
             "id": "wu1-5",
             "teamA": "E - Les Chaboudins",
-            "teamB": "H",
+            "teamB": "H - La Triforce",
             "scoreA": 2,
             "scoreB": 10,
             "field": 5
@@ -184,7 +184,7 @@
           {
             "id": "wu2-4",
             "teamA": "G",
-            "teamB": "H",
+            "teamB": "H - La Triforce",
             "scoreA": 0,
             "scoreB": 0,
             "field": 4
@@ -222,7 +222,7 @@
           {
             "id": "wu3-2",
             "teamA": "B",
-            "teamB": "H",
+            "teamB": "H - La Triforce",
             "scoreA": 0,
             "scoreB": 0,
             "field": 2
@@ -273,7 +273,7 @@
       "E - Les Chaboudins",
       "F",
       "G",
-      "H",
+      "H - La Triforce",
       "I",
       "J",
       "K",
@@ -315,7 +315,7 @@
       },
       "e5": {
         "teamA": "E - Les Chaboudins",
-        "teamB": "H",
+        "teamB": "H - La Triforce",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
