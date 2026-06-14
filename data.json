@@ -310,7 +310,7 @@
         "teamB": "I",
         "scoreA": 9,
         "scoreB": 10,
-        "winner": "",
+        "winner": "I",
         "field": 4
       },
       "e5": {
@@ -339,7 +339,7 @@
       },
       "q2": {
         "teamA": "C - Champions League",
-        "teamB": "À déterminer",
+        "teamB": "I",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
