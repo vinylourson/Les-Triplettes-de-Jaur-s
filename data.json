@@ -18,22 +18,23 @@
       ]
     },
     {
-      "name": "Les Rafleurs",
+      "name": "C",
       "members": [
-        "Jules",
-        "Kenza"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     },
     {
-      "name": "Carreau Club",
+      "name": "D",
       "members": [
-        "Lina",
-        "Malo",
-        "Nina"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     },
     {
-      "name": "Bouchon d'Or",
+      "name": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
       "members": [
         "Omar",
         "Paula"
@@ -115,7 +116,7 @@
           },
           {
             "id": "wu1-5",
-            "teamA": "Les Rafleurs",
+            "teamA": "C",
             "teamB": "Les Inséparables",
             "scoreA": 4,
             "scoreB": 3,
@@ -123,8 +124,8 @@
           },
           {
             "id": "wu1-6",
-            "teamA": "Carreau Club",
-            "teamB": "Bouchon d'Or",
+            "teamA": "D",
+            "teamB": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
             "scoreA": 3,
             "scoreB": 4,
             "field": 6
@@ -153,15 +154,15 @@
           },
           {
             "id": "wu2-3",
-            "teamA": "Les Rafleurs",
-            "teamB": "Carreau Club",
+            "teamA": "C",
+            "teamB": "D",
             "scoreA": 3,
             "scoreB": 7,
             "field": 3
           },
           {
             "id": "wu2-4",
-            "teamA": "Bouchon d'Or",
+            "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
             "teamB": "Les Inséparables",
             "scoreA": 7,
             "scoreB": 3,
@@ -192,7 +193,7 @@
           {
             "id": "wu3-1",
             "teamA": "Cochonnet Crew",
-            "teamB": "Bouchon d'Or",
+            "teamB": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
             "scoreA": 4,
             "scoreB": 8,
             "field": 1
@@ -223,7 +224,7 @@
           },
           {
             "id": "wu3-5",
-            "teamA": "Les Rafleurs",
+            "teamA": "C",
             "teamB": "Doublette Plus",
             "scoreA": 8,
             "scoreB": 7,
@@ -231,7 +232,7 @@
           },
           {
             "id": "wu3-6",
-            "teamA": "Carreau Club",
+            "teamA": "D",
             "teamB": "Le Cercle Bleu",
             "scoreA": 8,
             "scoreB": 9,
@@ -245,13 +246,13 @@
   "bracket": {
     "seeds": [
       "Les Mènes",
-      "Bouchon d'Or",
+      "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
       "Doublette Plus",
-      "Les Rafleurs",
+      "C",
       "B",
       "Cochonnet Crew",
       "Pointeurs Solidaires",
-      "Carreau Club",
+      "D",
       "Les Pointilleux",
       "Le Cercle Bleu",
       "Les Inséparables",
@@ -268,11 +269,11 @@
         "field": 1
       },
       "e2": {
-        "teamA": "Bouchon d'Or",
+        "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "teamB": "Les Inséparables",
         "scoreA": 13,
         "scoreB": 7,
-        "winner": "Bouchon d'Or",
+        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "field": 2
       },
       "e3": {
@@ -284,7 +285,7 @@
         "field": 3
       },
       "e4": {
-        "teamA": "Les Rafleurs",
+        "teamA": "C",
         "teamB": "Les Pointilleux",
         "scoreA": 4,
         "scoreB": 13,
@@ -293,7 +294,7 @@
       },
       "e5": {
         "teamA": "B",
-        "teamB": "Carreau Club",
+        "teamB": "D",
         "scoreA": 13,
         "scoreB": 2,
         "winner": "B",
@@ -309,10 +310,10 @@
       },
       "q1": {
         "teamA": "Les Mènes",
-        "teamB": "Bouchon d'Or",
+        "teamB": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "scoreA": 8,
         "scoreB": 13,
-        "winner": "Bouchon d'Or",
+        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "field": 1
       },
       "q2": {
@@ -332,11 +333,11 @@
         "field": 3
       },
       "s1": {
-        "teamA": "Bouchon d'Or",
+        "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "teamB": "Le Cercle Bleu",
         "scoreA": 13,
         "scoreB": 4,
-        "winner": "Bouchon d'Or",
+        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "field": 1
       },
       "s2": {
@@ -348,11 +349,11 @@
         "field": 2
       },
       "final": {
-        "teamA": "Bouchon d'Or",
+        "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "teamB": "Vainqueurs tournoi ados",
         "scoreA": 13,
         "scoreB": 1,
-        "winner": "Bouchon d'Or",
+        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
         "field": 1
       }
     }
