@@ -81,7 +81,7 @@
       ]
     },
     {
-      "name": "K",
+      "name": "K - Devine",
       "members": [
         "Nico R",
         "Virginie",
@@ -114,7 +114,7 @@
           {
             "id": "wu1-2",
             "teamA": "B - Hold up",
-            "teamB": "K",
+            "teamB": "K - Devine",
             "scoreA": 8,
             "scoreB": 7,
             "field": 2
@@ -199,7 +199,7 @@
           },
           {
             "id": "wu2-6",
-            "teamA": "K",
+            "teamA": "K - Devine",
             "teamB": "L - Les foudres de guerre",
             "scoreA": 2,
             "scoreB": 6,
@@ -246,7 +246,7 @@
           {
             "id": "wu3-5",
             "teamA": "E - Les Chaboudins",
-            "teamB": "K",
+            "teamB": "K - Devine",
             "scoreA": 0,
             "scoreB": 0,
             "field": 5
@@ -276,7 +276,7 @@
       "H - La Triforce",
       "I",
       "J -Inch'allah",
-      "K",
+      "K - Devine",
       "L - Les foudres de guerre"
     ],
     "extra": "",
@@ -291,7 +291,7 @@
       },
       "e2": {
         "teamA": "B - Hold up",
-        "teamB": "K",
+        "teamB": "K - Devine",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
