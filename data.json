@@ -2,7 +2,7 @@
   "version": 2,
   "teams": [
     {
-      "name": "A",
+      "name": "A - Les tireurs de litres",
       "members": [
         "Mathias",
         "David B",
@@ -105,7 +105,7 @@
         "matches": [
           {
             "id": "wu1-1",
-            "teamA": "A",
+            "teamA": "A - Les tireurs de litres",
             "teamB": "L - Les foudres de guerre",
             "scoreA": 1,
             "scoreB": 4,
@@ -159,7 +159,7 @@
         "matches": [
           {
             "id": "wu2-1",
-            "teamA": "A",
+            "teamA": "A - Les tireurs de litres",
             "teamB": "B - Hold up",
             "scoreA": 2,
             "scoreB": 3,
@@ -213,7 +213,7 @@
         "matches": [
           {
             "id": "wu3-1",
-            "teamA": "A",
+            "teamA": "A - Les tireurs de litres",
             "teamB": "G",
             "scoreA": 0,
             "scoreB": 0,
@@ -266,7 +266,7 @@
   },
   "bracket": {
     "seeds": [
-      "A",
+      "A - Les tireurs de litres",
       "B - Hold up",
       "C",
       "D - Les demis-dieux",
@@ -282,7 +282,7 @@
     "extra": "",
     "matches": {
       "e1": {
-        "teamA": "A",
+        "teamA": "A - Les tireurs de litres",
         "teamB": "L - Les foudres de guerre",
         "scoreA": 0,
         "scoreB": 0,
