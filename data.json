@@ -10,10 +10,11 @@
       ]
     },
     {
-      "name": "Tir de Précision",
+      "name": "B",
       "members": [
-        "Hugo",
-        "Inès"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     },
     {
@@ -106,7 +107,7 @@
           },
           {
             "id": "wu1-4",
-            "teamA": "Tir de Précision",
+            "teamA": "B",
             "teamB": "Pointeurs Solidaires",
             "scoreA": 4,
             "scoreB": 4,
@@ -145,7 +146,7 @@
           {
             "id": "wu2-2",
             "teamA": "A",
-            "teamB": "Tir de Précision",
+            "teamB": "B",
             "scoreA": 2,
             "scoreB": 8,
             "field": 2
@@ -214,7 +215,7 @@
           },
           {
             "id": "wu3-4",
-            "teamA": "Tir de Précision",
+            "teamA": "B",
             "teamB": "Les Mènes",
             "scoreA": 6,
             "scoreB": 7,
@@ -247,7 +248,7 @@
       "Bouchon d'Or",
       "Doublette Plus",
       "Les Rafleurs",
-      "Tir de Précision",
+      "B",
       "Cochonnet Crew",
       "Pointeurs Solidaires",
       "Carreau Club",
@@ -291,11 +292,11 @@
         "field": 4
       },
       "e5": {
-        "teamA": "Tir de Précision",
+        "teamA": "B",
         "teamB": "Carreau Club",
         "scoreA": 13,
         "scoreB": 2,
-        "winner": "Tir de Précision",
+        "winner": "B",
         "field": 5
       },
       "e6": {
@@ -323,7 +324,7 @@
         "field": 2
       },
       "q3": {
-        "teamA": "Tir de Précision",
+        "teamA": "B",
         "teamB": "Pointeurs Solidaires",
         "scoreA": 2,
         "scoreB": 13,
