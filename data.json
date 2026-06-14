@@ -34,7 +34,7 @@
       ]
     },
     {
-      "name": "E",
+      "name": "E - Les Chaboudins",
       "members": [
         "Céline V",
         "Lisiane",
@@ -137,7 +137,7 @@
           },
           {
             "id": "wu1-5",
-            "teamA": "E",
+            "teamA": "E - Les Chaboudins",
             "teamB": "H",
             "scoreA": 2,
             "scoreB": 10,
@@ -175,7 +175,7 @@
           },
           {
             "id": "wu2-3",
-            "teamA": "E",
+            "teamA": "E - Les Chaboudins",
             "teamB": "F",
             "scoreA": 0,
             "scoreB": 0,
@@ -245,7 +245,7 @@
           },
           {
             "id": "wu3-5",
-            "teamA": "E",
+            "teamA": "E - Les Chaboudins",
             "teamB": "K",
             "scoreA": 0,
             "scoreB": 0,
@@ -270,7 +270,7 @@
       "B",
       "C",
       "D - Les demis-dieux",
-      "E",
+      "E - Les Chaboudins",
       "F",
       "G",
       "H",
@@ -314,7 +314,7 @@
         "field": 4
       },
       "e5": {
-        "teamA": "E",
+        "teamA": "E - Les Chaboudins",
         "teamB": "H",
         "scoreA": 0,
         "scoreB": 0,
