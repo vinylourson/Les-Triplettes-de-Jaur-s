@@ -2,7 +2,7 @@
   "version": 2,
   "teams": [
     {
-      "name": "La Triplette Verte",
+      "name": "A",
       "members": [
         "Emma",
         "Farid",
@@ -98,7 +98,7 @@
           },
           {
             "id": "wu1-3",
-            "teamA": "La Triplette Verte",
+            "teamA": "A",
             "teamB": "Les Mènes",
             "scoreA": 2,
             "scoreB": 5,
@@ -144,7 +144,7 @@
           },
           {
             "id": "wu2-2",
-            "teamA": "La Triplette Verte",
+            "teamA": "A",
             "teamB": "Tir de Précision",
             "scoreA": 2,
             "scoreB": 8,
@@ -206,7 +206,7 @@
           },
           {
             "id": "wu3-3",
-            "teamA": "La Triplette Verte",
+            "teamA": "A",
             "teamB": "Pointeurs Solidaires",
             "scoreA": 1,
             "scoreB": 5,
@@ -254,13 +254,13 @@
       "Les Pointilleux",
       "Le Cercle Bleu",
       "Les Inséparables",
-      "La Triplette Verte"
+      "A"
     ],
     "extra": "Vainqueurs tournoi ados",
     "matches": {
       "e1": {
         "teamA": "Les Mènes",
-        "teamB": "La Triplette Verte",
+        "teamB": "A",
         "scoreA": 13,
         "scoreB": 3,
         "winner": "Les Mènes",
