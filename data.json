@@ -302,7 +302,7 @@
         "teamB": "C - Champions League",
         "scoreA": 0,
         "scoreB": 10,
-        "winner": "",
+        "winner": "C - Champions League",
         "field": 3
       },
       "e4": {
@@ -338,7 +338,7 @@
         "field": 1
       },
       "q2": {
-        "teamA": "À déterminer",
+        "teamA": "C - Champions League",
         "teamB": "À déterminer",
         "scoreA": 0,
         "scoreB": 0,
