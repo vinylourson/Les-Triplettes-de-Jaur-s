@@ -18,7 +18,7 @@
       ]
     },
     {
-      "name": "C",
+      "name": "C - Champions League",
       "members": [
         "Audrey",
         "David D",
@@ -121,7 +121,7 @@
           },
           {
             "id": "wu1-3",
-            "teamA": "C",
+            "teamA": "C - Champions League",
             "teamB": "J -Inch'allah",
             "scoreA": 5,
             "scoreB": 9,
@@ -167,7 +167,7 @@
           },
           {
             "id": "wu2-2",
-            "teamA": "C",
+            "teamA": "C - Champions League",
             "teamB": "D - Les demis-dieux",
             "scoreA": 1,
             "scoreB": 5,
@@ -229,7 +229,7 @@
           },
           {
             "id": "wu3-3",
-            "teamA": "C",
+            "teamA": "C - Champions League",
             "teamB": "I",
             "scoreA": 5,
             "scoreB": 5,
@@ -275,7 +275,7 @@
       "F",
       "A - Les tireurs de litres",
       "I",
-      "C",
+      "C - Champions League",
       "G - Les O.J.P",
       "K - Devine"
     ],
@@ -299,7 +299,7 @@
       },
       "e3": {
         "teamA": "L - Les foudres de guerre",
-        "teamB": "C",
+        "teamB": "C - Champions League",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
