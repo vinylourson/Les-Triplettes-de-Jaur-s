@@ -34,14 +34,15 @@
       ]
     },
     {
-      "name": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+      "name": "E",
       "members": [
-        "Omar",
-        "Paula"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     },
     {
-      "name": "Les Inséparables",
+      "name": "F",
       "members": [
         "Quentin",
         "Rania"
@@ -117,7 +118,7 @@
           {
             "id": "wu1-5",
             "teamA": "C",
-            "teamB": "Les Inséparables",
+            "teamB": "F",
             "scoreA": 4,
             "scoreB": 3,
             "field": 5
@@ -125,7 +126,7 @@
           {
             "id": "wu1-6",
             "teamA": "D",
-            "teamB": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+            "teamB": "E",
             "scoreA": 3,
             "scoreB": 4,
             "field": 6
@@ -162,8 +163,8 @@
           },
           {
             "id": "wu2-4",
-            "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
-            "teamB": "Les Inséparables",
+            "teamA": "E",
+            "teamB": "F",
             "scoreA": 7,
             "scoreB": 3,
             "field": 4
@@ -193,7 +194,7 @@
           {
             "id": "wu3-1",
             "teamA": "Cochonnet Crew",
-            "teamB": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+            "teamB": "E",
             "scoreA": 4,
             "scoreB": 8,
             "field": 1
@@ -201,7 +202,7 @@
           {
             "id": "wu3-2",
             "teamA": "Les Pointilleux",
-            "teamB": "Les Inséparables",
+            "teamB": "F",
             "scoreA": 3,
             "scoreB": 3,
             "field": 2
@@ -246,7 +247,7 @@
   "bracket": {
     "seeds": [
       "Les Mènes",
-      "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+      "E",
       "Doublette Plus",
       "C",
       "B",
@@ -255,7 +256,7 @@
       "D",
       "Les Pointilleux",
       "Le Cercle Bleu",
-      "Les Inséparables",
+      "F",
       "A"
     ],
     "extra": "Vainqueurs tournoi ados",
@@ -269,11 +270,11 @@
         "field": 1
       },
       "e2": {
-        "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
-        "teamB": "Les Inséparables",
+        "teamA": "E",
+        "teamB": "F",
         "scoreA": 13,
         "scoreB": 7,
-        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+        "winner": "E",
         "field": 2
       },
       "e3": {
@@ -310,10 +311,10 @@
       },
       "q1": {
         "teamA": "Les Mènes",
-        "teamB": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+        "teamB": "E",
         "scoreA": 8,
         "scoreB": 13,
-        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+        "winner": "E",
         "field": 1
       },
       "q2": {
@@ -333,11 +334,11 @@
         "field": 3
       },
       "s1": {
-        "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+        "teamA": "E",
         "teamB": "Le Cercle Bleu",
         "scoreA": 13,
         "scoreB": 4,
-        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+        "winner": "E",
         "field": 1
       },
       "s2": {
@@ -349,11 +350,11 @@
         "field": 2
       },
       "final": {
-        "teamA": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+        "teamA": "E",
         "teamB": "Vainqueurs tournoi ados",
         "scoreA": 13,
         "scoreB": 1,
-        "winner": "joueur⋅euse 1, joueur⋅se 2, joueur⋅se 3",
+        "winner": "E",
         "field": 1
       }
     }
