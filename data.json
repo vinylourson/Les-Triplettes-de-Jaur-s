@@ -74,7 +74,7 @@
       ]
     },
     {
-      "name": "K",
+      "name": "J",
       "members": [
         "joueur⋅euse 1",
         "joueur⋅se 2",
@@ -99,7 +99,7 @@
           {
             "id": "wu1-1",
             "teamA": "Cochonnet Crew",
-            "teamB": "K",
+            "teamB": "J",
             "scoreA": 9,
             "scoreB": 3,
             "field": 1
@@ -193,7 +193,7 @@
           {
             "id": "wu2-6",
             "teamA": "I",
-            "teamB": "K",
+            "teamB": "J",
             "scoreA": 13,
             "scoreB": 4,
             "field": 6
@@ -247,7 +247,7 @@
           {
             "id": "wu3-6",
             "teamA": "D",
-            "teamB": "K",
+            "teamB": "J",
             "scoreA": 8,
             "scoreB": 9,
             "field": 6
@@ -268,7 +268,7 @@
       "G",
       "D",
       "Les Pointilleux",
-      "K",
+      "J",
       "F",
       "A"
     ],
@@ -292,10 +292,10 @@
       },
       "e3": {
         "teamA": "I",
-        "teamB": "K",
+        "teamB": "J",
         "scoreA": 9,
         "scoreB": 13,
-        "winner": "K",
+        "winner": "J",
         "field": 3
       },
       "e4": {
@@ -331,11 +331,11 @@
         "field": 1
       },
       "q2": {
-        "teamA": "K",
+        "teamA": "J",
         "teamB": "Les Pointilleux",
         "scoreA": 13,
         "scoreB": 4,
-        "winner": "K",
+        "winner": "J",
         "field": 2
       },
       "q3": {
@@ -348,7 +348,7 @@
       },
       "s1": {
         "teamA": "E",
-        "teamB": "K",
+        "teamB": "J",
         "scoreA": 13,
         "scoreB": 4,
         "winner": "E",
