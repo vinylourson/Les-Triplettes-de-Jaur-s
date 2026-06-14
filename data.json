@@ -89,7 +89,7 @@
       ]
     },
     {
-      "name": "L",
+      "name": "L - Les foudres de guerre",
       "members": [
         "Céline T",
         "Marie A",
@@ -106,7 +106,7 @@
           {
             "id": "wu1-1",
             "teamA": "A",
-            "teamB": "L",
+            "teamB": "L - Les foudres de guerre",
             "scoreA": 0,
             "scoreB": 0,
             "field": 1
@@ -200,7 +200,7 @@
           {
             "id": "wu2-6",
             "teamA": "K",
-            "teamB": "L",
+            "teamB": "L - Les foudres de guerre",
             "scoreA": 0,
             "scoreB": 0,
             "field": 6
@@ -254,7 +254,7 @@
           {
             "id": "wu3-6",
             "teamA": "F",
-            "teamB": "L",
+            "teamB": "L - Les foudres de guerre",
             "scoreA": 0,
             "scoreB": 0,
             "field": 6
@@ -277,13 +277,13 @@
       "I",
       "J",
       "K",
-      "L"
+      "L - Les foudres de guerre"
     ],
     "extra": "",
     "matches": {
       "e1": {
         "teamA": "A",
-        "teamB": "L",
+        "teamB": "L - Les foudres de guerre",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
