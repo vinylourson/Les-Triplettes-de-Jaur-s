@@ -49,7 +49,7 @@
       ]
     },
     {
-      "name": "G",
+      "name": "G - Les O.J.P",
       "members": [
         "Joseph",
         "Odile",
@@ -146,7 +146,7 @@
           {
             "id": "wu1-6",
             "teamA": "F",
-            "teamB": "G",
+            "teamB": "G - Les O.J.P",
             "scoreA": 5,
             "scoreB": 2,
             "field": 6
@@ -183,7 +183,7 @@
           },
           {
             "id": "wu2-4",
-            "teamA": "G",
+            "teamA": "G - Les O.J.P",
             "teamB": "H - La Triforce",
             "scoreA": 5,
             "scoreB": 6,
@@ -214,7 +214,7 @@
           {
             "id": "wu3-1",
             "teamA": "A - Les tireurs de litres",
-            "teamB": "G",
+            "teamB": "G - Les O.J.P",
             "scoreA": 0,
             "scoreB": 0,
             "field": 1
@@ -272,7 +272,7 @@
       "D - Les demis-dieux",
       "E - Les Chaboudins",
       "F",
-      "G",
+      "G - Les O.J.P",
       "H - La Triforce",
       "I",
       "J -Inch'allah",
@@ -323,7 +323,7 @@
       },
       "e6": {
         "teamA": "F",
-        "teamB": "G",
+        "teamB": "G - Les O.J.P",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
