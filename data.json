@@ -279,7 +279,7 @@
       "G - Les O.J.P",
       "K - Devine"
     ],
-    "extra": "",
+    "extra": "Meilleur perdant des 1/4",
     "matches": {
       "e1": {
         "teamA": "D - Les demis-dieux",
@@ -363,7 +363,7 @@
       },
       "s2": {
         "teamA": "À déterminer",
-        "teamB": "À déterminer",
+        "teamB": "Meilleur perdant des 1/4",
         "scoreA": 0,
         "scoreB": 0,
         "winner": "",
