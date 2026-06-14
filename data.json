@@ -2,13 +2,6 @@
   "version": 2,
   "teams": [
     {
-      "name": "Cochonnet Crew",
-      "members": [
-        "Alice",
-        "Bruno"
-      ]
-    },
-    {
       "name": "Les Pointilleux",
       "members": [
         "Chloé",
