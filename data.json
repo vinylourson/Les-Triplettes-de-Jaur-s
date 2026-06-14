@@ -301,7 +301,7 @@
         "teamA": "L - Les foudres de guerre",
         "teamB": "C - Champions League",
         "scoreA": 0,
-        "scoreB": 0,
+        "scoreB": 10,
         "winner": "",
         "field": 3
       },
