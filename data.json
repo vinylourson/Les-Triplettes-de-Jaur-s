@@ -10,7 +10,7 @@
       ]
     },
     {
-      "name": "B",
+      "name": "B - Hold up",
       "members": [
         "Thierry",
         "Flo",
@@ -113,7 +113,7 @@
           },
           {
             "id": "wu1-2",
-            "teamA": "B",
+            "teamA": "B - Hold up",
             "teamB": "K",
             "scoreA": 8,
             "scoreB": 7,
@@ -160,7 +160,7 @@
           {
             "id": "wu2-1",
             "teamA": "A",
-            "teamB": "B",
+            "teamB": "B - Hold up",
             "scoreA": 2,
             "scoreB": 3,
             "field": 1
@@ -221,7 +221,7 @@
           },
           {
             "id": "wu3-2",
-            "teamA": "B",
+            "teamA": "B - Hold up",
             "teamB": "H - La Triforce",
             "scoreA": 0,
             "scoreB": 0,
@@ -267,7 +267,7 @@
   "bracket": {
     "seeds": [
       "A",
-      "B",
+      "B - Hold up",
       "C",
       "D - Les demis-dieux",
       "E - Les Chaboudins",
@@ -290,7 +290,7 @@
         "field": 1
       },
       "e2": {
-        "teamA": "B",
+        "teamA": "B - Hold up",
         "teamB": "K",
         "scoreA": 0,
         "scoreB": 0,
