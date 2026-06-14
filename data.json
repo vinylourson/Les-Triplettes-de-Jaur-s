@@ -74,10 +74,11 @@
       ]
     },
     {
-      "name": "Le Cercle Bleu",
+      "name": "K",
       "members": [
-        "Yann",
-        "Zoé"
+        "joueur⋅euse 1",
+        "joueur⋅se 2",
+        "joueur⋅se 3"
       ]
     }
   ],
@@ -90,7 +91,7 @@
           {
             "id": "wu1-1",
             "teamA": "Cochonnet Crew",
-            "teamB": "Le Cercle Bleu",
+            "teamB": "K",
             "scoreA": 9,
             "scoreB": 3,
             "field": 1
@@ -184,7 +185,7 @@
           {
             "id": "wu2-6",
             "teamA": "I",
-            "teamB": "Le Cercle Bleu",
+            "teamB": "K",
             "scoreA": 13,
             "scoreB": 4,
             "field": 6
@@ -238,7 +239,7 @@
           {
             "id": "wu3-6",
             "teamA": "D",
-            "teamB": "Le Cercle Bleu",
+            "teamB": "K",
             "scoreA": 8,
             "scoreB": 9,
             "field": 6
@@ -259,7 +260,7 @@
       "G",
       "D",
       "Les Pointilleux",
-      "Le Cercle Bleu",
+      "K",
       "F",
       "A"
     ],
@@ -283,10 +284,10 @@
       },
       "e3": {
         "teamA": "I",
-        "teamB": "Le Cercle Bleu",
+        "teamB": "K",
         "scoreA": 9,
         "scoreB": 13,
-        "winner": "Le Cercle Bleu",
+        "winner": "K",
         "field": 3
       },
       "e4": {
@@ -322,11 +323,11 @@
         "field": 1
       },
       "q2": {
-        "teamA": "Le Cercle Bleu",
+        "teamA": "K",
         "teamB": "Les Pointilleux",
         "scoreA": 13,
         "scoreB": 4,
-        "winner": "Le Cercle Bleu",
+        "winner": "K",
         "field": 2
       },
       "q3": {
@@ -339,7 +340,7 @@
       },
       "s1": {
         "teamA": "E",
-        "teamB": "Le Cercle Bleu",
+        "teamB": "K",
         "scoreA": 13,
         "scoreB": 4,
         "winner": "E",
